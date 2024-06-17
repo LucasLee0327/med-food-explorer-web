@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://midterm-website-for-padn-v4-backend.onrender.com",
+        target: "https://med-food-explorer-web-server.onrender.com",
         changeOrigin: true,
       },
     },

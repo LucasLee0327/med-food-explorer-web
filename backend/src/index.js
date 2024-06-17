@@ -13,7 +13,7 @@ const port = process.env.PORT || 8000;
 const app = express();
 
 const corsOptions = {
-  origin: 'https://midterm-website-for-padn-v4-frontend.onrender.com',
+  origin: 'https://med-food-explorer-web.onrender.com',
   credentials: true,
 };
 app.use(cors(corsOptions));
