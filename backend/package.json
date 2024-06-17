@@ -1,0 +1,31 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "yarn prisma migrate deploy && node --experimental-specifier-resolution=node src/index.js",
+    "dev": "nodemon --experimental-specifier-resolution=node src/index.js",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.11.0",
+    "@prisma/engines-version": "^5.11.0-15.efd2449663b3d73d637ea1fd226bafbcf45b3102",
+    "axios": "^1.6.8",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "csrf-csrf": "^2.2.3",
+    "dompurify": "^3.1.1",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "file-type": "^19.0.0",
+    "glob": "^10.3.12",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.2",
+    "prisma": "^5.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

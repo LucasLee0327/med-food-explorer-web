@@ -1,0 +1,13 @@
+{
+  "name": "med-food-explorer-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "homepage": "https://midterm-website-for-padn-v4-frontend.onrender.com",
+  "author": "LucasLee0327 <0327lucas@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd backend && yarn start",
+    "build": "cd frontend && yarn build",
+    "install:all": "cd frontend && yarn install -- production=false && cd ../backend && yarn"
+  }
+}
