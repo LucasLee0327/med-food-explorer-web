@@ -4,18 +4,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { AuthProvider } from './AuthContext';
 import RootLayout, { RootIndex } from "./pages";
-import About from "./pages/about";
+import About from "./pages/About";
 import "./index.css";
-import Chatboard from "./pages/Chatboard";
-import LoginPage from "./pages/Login";
-import SignUpPage from "./pages/Signup";
+import Map from "./pages/Map";
+import Finder from "./pages/Finder";
+import Draw from "./pages/Draw";
 import ErrorPage from "./pages/error-page";
-import MyProfilePage from "./pages/myprofile";
-import LogoutPage from "./pages/logout";
-import ChatGPTPage from "./pages/chatGPT";
-// import dotenv from 'dotenv';
-
-// dotenv.config();
+import Addnew from "./pages/Addnew";
 
 const router = createBrowserRouter([
   {
@@ -25,32 +20,24 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <RootIndex /> },
       {
-        path: "/about",
+        path: "/About",
         element: <About />,
       },
       {
-        path: "/Chatboard",
-        element: <Chatboard />,
+        path: "/Map",
+        element: <Map />,
       },
       {
-        path: "/Login",
-        element: <LoginPage />,
+        path: "/Finder",
+        element: <Finder />,
       },
       {
-        path: "/signup",
-        element: <SignUpPage />,
+        path: "/Draw",
+        element: <Draw />,
       },
       {
-        path: "/myprofile",
-        element: <MyProfilePage />,
-      },
-      {
-        path: "/logout",
-        element: <LogoutPage />,
-      },
-      {
-        path: "/chatGPT",
-        element: <ChatGPTPage />,
+        path: "/Addnew",
+        element: <Addnew />,
       },
     ],
   },

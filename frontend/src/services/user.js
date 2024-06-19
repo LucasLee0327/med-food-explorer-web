@@ -29,8 +29,4 @@ export const user = {
     const { data } = await api.delete(`/posts/${messageId}`);
     return data;
   },
-  async poMessageToChatGPT(message) {
-    const response = await api.post("/GPT", { content: message });
-    return response.data;
-  }
 };
