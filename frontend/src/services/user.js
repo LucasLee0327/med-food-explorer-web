@@ -1,16 +1,16 @@
 import api from "./axiosClient";
 
 export const user = {
-  async createOne({ username, password }) {
-    const { data } = await api.post("/users", { username, password });
+  async getAll() {
+    const { data } = await api.get("/foods");
+    return data;
+  },
+  async createOne({  }) {
+    const { data } = await api.post("/foods", {  });
     return data;
   },
   async getOne() {
-    const { data } = await api.get("/users/profile");
-    return data;
-  },
-  async getName() {
-    const { data } = await api.get("/session/username");
+    const { data } = await api.get("/foods/profile");
     return data;
   },
   async uploadImage({ avatar }){

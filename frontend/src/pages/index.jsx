@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import myicon from "./pikachu.png"
-import homegif from "./starburst-yay.gif"
+import homeicon from "./what-to-eat.jpg"
 
 
 function classNames(...classes) {
@@ -13,13 +13,12 @@ function classNames(...classes) {
 
 export default function RootLayout() {
   const navigation = [
-      { name: 'Home', href: '/' },
+      { name: '首頁', href: '/' },
       { name: '關於本站', href: '/About' },
       { name: '美食地圖', href: '/Map' },
       { name: '尋找美食', href: '/Finder'},
       { name: '美食抽獎', href: '/Draw'},
       { name: '新增美食', href: '/Addnew'}
-      // 其他已登入後需要顯示的連結
     ];
 
   return (
@@ -63,7 +62,7 @@ export default function RootLayout() {
                             classNames(
                               isActive
                                 ? "bg-red-600 text-white"
-                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                : "text-gray-300 hover:bg-red-800 hover:text-white",
                               "rounded-md px-3 py-2 text-sm font-medium"
                             )
                           }
@@ -90,7 +89,7 @@ export default function RootLayout() {
                         classNames(
                           isActive
                             ? "bg-red-600 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            : "text-gray-300 hover:bg-red-800 hover:text-white",
                           "block rounded-md px-3 py-2 text-base font-medium"
                         )
                       }
@@ -120,7 +119,7 @@ export function RootIndex() {
       </div>
       <div className="flex justify-center">
         <a href="https://www.youtube.com/watch?v=yQgN0A0WCzE" target="_blank">
-          <img src={homegif} className="w-52 logo" />
+          <img src={homeicon} className="w-52 logo" />
         </a>
       </div>
     </div>

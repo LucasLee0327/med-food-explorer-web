@@ -1,8 +1,4 @@
 import mypic from './pikachu-surprised.jpg'
-import chatgpt1 from './ChatGPT1.png'
-import chatgpt2 from './ChatGPT2.png'
-import chatgpt3 from './ChatGPT3.png'
-import skillmeme from './skill issue.png'
 
 function About() {
   return(
@@ -12,8 +8,7 @@ function About() {
           <img class="object-cover object-center rounded" alt="my selfie" src={mypic} />
         </div>
         <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-          <p class="text-2xl mb-4 text-gray-900">城中美食網</p>
-          <p class="text-3xl hidden lg:inline-block">李承洋</p>
+          <p class="text-4xl mb-4 text-gray-900">城中美食網</p>
                 
           <p class="my-8 leading-relaxed">
             因為在台大醫學院a.k.a.美食沙漠餓瘋了
