@@ -6,7 +6,7 @@ function Draw() {
 
     return (
         <>
-            <h1>Draw page</h1>
+            <h1>Draw page for difficult-chooser</h1>
         </>      
     )
 }
