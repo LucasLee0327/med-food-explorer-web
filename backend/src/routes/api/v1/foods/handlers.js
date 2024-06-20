@@ -9,15 +9,15 @@ import { fileTypeFromBuffer } from 'file-type';
 export async function getAllRestaurant(req, res) {
   const filters = req.query;
   const { style = [], type = [], price = [], arr_time = [] } = filters;
-
+  console.log(filters);
   try {
       const foods = await prisma.food.findMany({
-          where: {
-              style: style ? { in: Array.isArray(style) ? style : [style] } : undefined,
-              type: type ? { in: Array.isArray(type) ? type : [type] } : undefined,
-              price: price ? { in: Array.isArray(price) ? price : [price] } : undefined,
-              arr_time: arr_time ? { in: Array.isArray(arr_time) ? arr_time : [arr_time] } : undefined,
-          },
+        where: {
+            style: style.length > 0 ? { in: style } : undefined,
+            type: type.length > 0 ? { in: type } : undefined,
+            price: price.length > 0 ? { in: price } : undefined,
+            arr_time: arr_time.length > 0 ? { in: arr_time } : undefined,
+        },
       });
 
       res.json(foods);
