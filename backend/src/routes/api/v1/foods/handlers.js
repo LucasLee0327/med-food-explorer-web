@@ -18,7 +18,7 @@ export async function getAllRestaurant(req, res) {
 
 export async function createRestaurant(req, res) {
   const { name, style, type, price, arr_time } = req.body;
-  console.log('Received data:', { name, style, type, price, arr_time });
+  console.log('Received data:', { name, style, type, price, arr_time }); // 新增這行來檢查接收到的資料
   try {
       /*
       const existingRestaurant = await prisma.food.findUnique({

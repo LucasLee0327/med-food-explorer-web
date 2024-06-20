@@ -5,11 +5,11 @@ import services from "../services";
 
 function AdminAdd() {
     const [newRestaurant, setNewRestaurant] = useState({
-        name: '',
-        style: '中式',
-        type: '飯',
-        price: '便宜',
-        arr_time: '馬上'
+        name: "",
+        style: "中式",
+        type: "飯",
+        price: "便宜",
+        arr_time: "馬上"
     });
     const navigate = useNavigate();
 
@@ -23,6 +23,7 @@ function AdminAdd() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('Submitting data:', newRestaurant); // 新增這行來檢查表單資料
         try {
             await services.user.createOne(newRestaurant);
             alert("Adding new restaurant succeeded!");
