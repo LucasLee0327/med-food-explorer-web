@@ -25,8 +25,10 @@ function AdminAdd() {
         e.preventDefault();
         try {
             await services.user.createOne(newRestaurant);
+            alert("Adding new restaurant succeeded!");
         } catch (error) {
             console.error('Error adding new restaurant:', error);
+            alert('Error adding new restaurant. Please try again.');
         }
     };
 

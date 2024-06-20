@@ -18,7 +18,9 @@ export async function getAllRestaurant(req, res) {
 
 export async function createRestaurant(req, res) {
   const { name, style, type, price, arr_time } = req.body;
+  console.log('Received data:', { name, style, type, price, arr_time });
   try {
+      /*
       const existingRestaurant = await prisma.food.findUnique({
         where: {
           name: name,
@@ -29,6 +31,7 @@ export async function createRestaurant(req, res) {
       if (existingRestaurant) {
         return res.status(400).json({ message: 'Restaurant already exists.' });
       }
+        */
       const newRestaurant = await prisma.food.create({
           data: {
               name,
