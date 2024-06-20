@@ -19,21 +19,18 @@ export async function getAllRestaurant(req, res) {
 export async function createRestaurant(req, res) {
   const { newRestaurant } = req.body;
   const { name, style, type, price, arr_time } = newRestaurant;
-  console.log('Received data:', { name, style, type, price, arr_time }); // 新增這行來檢查接收到的資料
   try {
-      /*
       const existingRestaurant = await prisma.food.findUnique({
         where: {
           name: name,
         },
       });
     
-      // 如果username已存在，返回錯誤訊息
       if (existingRestaurant) {
         return res.status(400).json({ message: 'Restaurant already exists.' });
       }
-        */
-      const newRestaurant = await prisma.food.create({
+      
+      const restaurant = await prisma.food.create({
           data: {
               name:name,
               style:style,
@@ -42,7 +39,7 @@ export async function createRestaurant(req, res) {
               arr_time:arr_time
           }
       });
-      res.status(201).json(newRestaurant);
+      res.status(201).json(restaurant);
   } catch (error) {
       console.error('Error adding new restaurant:', error);
       res.status(500).json({ error: 'An error occurred while adding new restaurant.' });

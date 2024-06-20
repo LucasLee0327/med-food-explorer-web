@@ -23,13 +23,12 @@ function AdminAdd() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Submitting data:', newRestaurant); // 新增這行來檢查表單資料
         try {
             await services.user.createOne(newRestaurant);
             alert("Adding new restaurant succeeded!");
         } catch (error) {
             console.error('Error adding new restaurant:', error);
-            alert('Error adding new restaurant. Please try again.');
+            alert('Error adding new restaurant. Check if restaurant already exists or try again.');
         }
     };
 
