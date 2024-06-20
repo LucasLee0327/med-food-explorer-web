@@ -39,13 +39,13 @@ function AdminAdd() {
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>
-                        店名（name）:
+                        店名:
                         <input type="text" name="name" value={newRestaurant.name} onChange={handleChange} required />
                     </label>
                 </div>
                 <div>
                     <label>
-                        料理形式（style）:
+                        料理形式:
                         <select name="style" value={newRestaurant.style} onChange={handleChange}>
                             <option value="中式">中式</option>
                             <option value="西式">西式</option>
@@ -58,7 +58,7 @@ function AdminAdd() {
                 </div>
                 <div>
                     <label>
-                        料理類別（type）:
+                        料理類別:
                         <select name="type" value={newRestaurant.type} onChange={handleChange}>
                             <option value="飯">飯</option>
                             <option value="麵">麵</option>
@@ -69,7 +69,7 @@ function AdminAdd() {
                 </div>
                 <div>
                     <label>
-                        價錢（price）:
+                        價錢:
                         <select name="price" value={newRestaurant.price} onChange={handleChange}>
                             <option value="便宜">便宜</option>
                             <option value="中等">中等</option>
@@ -79,7 +79,7 @@ function AdminAdd() {
                 </div>
                 <div>
                     <label>
-                        時間（arr_time）:
+                        時間:
                         <select name="arr_time" value={newRestaurant.arr_time} onChange={handleChange}>
                             <option value="馬上">馬上</option>
                             <option value="5分">5分</option>
