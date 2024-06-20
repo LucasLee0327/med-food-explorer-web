@@ -11,7 +11,6 @@ function Finder() {
         price: [],
         arr_time: []
     });
-    const navigate = useNavigate();
 
     useEffect(() => {
         fetchData();
@@ -27,14 +26,12 @@ function Finder() {
     };
 
     const handleFilterChange = (event) => {
-        const { name, options } = event.target;
-        const selectedOptions = Array.from(options)
-            .filter(option => option.selected)
-            .map(option => option.value);
+        const { name, value } = event.target;
+        const isChecked = event.target.checked;
 
         setFilters(prevFilters => ({
             ...prevFilters,
-            [name]: selectedOptions
+            [name]: isChecked ? [...prevFilters[name], value] : prevFilters[name].filter(item => item !== value)
         }));
     };
 
@@ -52,44 +49,62 @@ function Finder() {
         <>
             <h1>Finder Page</h1>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Style:
-                    <select name="style" multiple value={filters.style} onChange={handleFilterChange}>
-                        <option value="中式">中式</option>
-                        <option value="西式">西式</option>
-                        <option value="日式">日式</option>
-                        <option value="韓式">韓式</option>
-                        <option value="台式">台式</option>
-                        <option value="其他">其他</option>
-                    </select>
-                </label>
-                <label>
-                    Type:
-                    <select name="type" multiple value={filters.type} onChange={handleFilterChange}>
-                        <option value="飯">飯</option>
-                        <option value="麵">麵</option>
-                        <option value="麵包">麵包</option>
-                        <option value="其他">其他</option>
-                    </select>
-                </label>
-                <label>
-                    Price:
-                    <select name="price" multiple value={filters.price} onChange={handleFilterChange}>
-                        <option value="便宜">便宜</option>
-                        <option value="中等">中等</option>
-                        <option value="貴">貴</option>
-                    </select>
-                </label>
-                <label>
-                    Arrival Time:
-                    <select name="arr_time" multiple value={filters.arr_time} onChange={handleFilterChange}>
-                        <option value="馬上">馬上</option>
-                        <option value="5分">5分</option>
-                        <option value="10分">10分</option>
-                        <option value="20分">20分</option>
-                        <option value="30以上">30以上</option>
-                    </select>
-                </label>
+                <fieldset>
+                    <legend>Style:</legend>
+                    <label>
+                        <input type="checkbox" name="style" value="中式" onChange={handleFilterChange} checked={filters.style.includes("中式")} />
+                        中式
+                    </label>
+                    <label>
+                        <input type="checkbox" name="style" value="西式" onChange={handleFilterChange} checked={filters.style.includes("西式")} />
+                        西式
+                    </label>
+                    <label>
+                        <input type="checkbox" name="style" value="日式" onChange={handleFilterChange} checked={filters.style.includes("日式")} />
+                        日式
+                    </label>
+                    {/* 其他 style 選項 ... */}
+                </fieldset>
+
+                <fieldset>
+                    <legend>Type:</legend>
+                    <label>
+                        <input type="checkbox" name="type" value="飯" onChange={handleFilterChange} checked={filters.type.includes("飯")} />
+                        飯
+                    </label>
+                    <label>
+                        <input type="checkbox" name="type" value="麵" onChange={handleFilterChange} checked={filters.type.includes("麵")} />
+                        麵
+                    </label>
+                    {/* 其他 type 選項 ... */}
+                </fieldset>
+
+                <fieldset>
+                    <legend>Price:</legend>
+                    <label>
+                        <input type="checkbox" name="price" value="便宜" onChange={handleFilterChange} checked={filters.price.includes("便宜")} />
+                        便宜
+                    </label>
+                    <label>
+                        <input type="checkbox" name="price" value="中等" onChange={handleFilterChange} checked={filters.price.includes("中等")} />
+                        中等
+                    </label>
+                    {/* 其他 price 選項 ... */}
+                </fieldset>
+
+                <fieldset>
+                    <legend>Arrival Time:</legend>
+                    <label>
+                        <input type="checkbox" name="arr_time" value="馬上" onChange={handleFilterChange} checked={filters.arr_time.includes("馬上")} />
+                        馬上
+                    </label>
+                    <label>
+                        <input type="checkbox" name="arr_time" value="5分" onChange={handleFilterChange} checked={filters.arr_time.includes("5分")} />
+                        5分
+                    </label>
+                    {/* 其他 arr_time 選項 ... */}
+                </fieldset>
+
                 <button type="submit">Apply Filters</button>
             </form>
             <div>
