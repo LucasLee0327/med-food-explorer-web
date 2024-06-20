@@ -37,6 +37,7 @@ function Finder() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(filters);
         try {
             const filteredFoods = await services.user.getAll(filters);
             setFoods(filteredFoods);
@@ -63,7 +64,18 @@ function Finder() {
                         <input type="checkbox" name="style" value="日式" onChange={handleFilterChange} checked={filters.style.includes("日式")} />
                         日式
                     </label>
-                    {/* 其他 style 選項 ... */}
+                    <label>
+                        <input type="checkbox" name="style" value="韓式" onChange={handleFilterChange} checked={filters.style.includes("韓式")} />
+                        韓式
+                    </label>
+                    <label>
+                        <input type="checkbox" name="style" value="台式" onChange={handleFilterChange} checked={filters.style.includes("台式")} />
+                        台式
+                    </label>
+                    <label>
+                        <input type="checkbox" name="style" value="其他" onChange={handleFilterChange} checked={filters.style.includes("其他")} />
+                        其他
+                    </label>
                 </fieldset>
 
                 <fieldset>
@@ -76,7 +88,14 @@ function Finder() {
                         <input type="checkbox" name="type" value="麵" onChange={handleFilterChange} checked={filters.type.includes("麵")} />
                         麵
                     </label>
-                    {/* 其他 type 選項 ... */}
+                    <label>
+                        <input type="checkbox" name="type" value="麵包" onChange={handleFilterChange} checked={filters.type.includes("麵包")} />
+                        麵包
+                    </label>
+                    <label>
+                        <input type="checkbox" name="type" value="其他" onChange={handleFilterChange} checked={filters.type.includes("其他")} />
+                        其他
+                    </label>
                 </fieldset>
 
                 <fieldset>
@@ -89,7 +108,10 @@ function Finder() {
                         <input type="checkbox" name="price" value="中等" onChange={handleFilterChange} checked={filters.price.includes("中等")} />
                         中等
                     </label>
-                    {/* 其他 price 選項 ... */}
+                    <label>
+                        <input type="checkbox" name="price" value="貴" onChange={handleFilterChange} checked={filters.price.includes("貴")} />
+                        貴
+                    </label>
                 </fieldset>
 
                 <fieldset>
@@ -102,7 +124,18 @@ function Finder() {
                         <input type="checkbox" name="arr_time" value="5分" onChange={handleFilterChange} checked={filters.arr_time.includes("5分")} />
                         5分
                     </label>
-                    {/* 其他 arr_time 選項 ... */}
+                    <label>
+                        <input type="checkbox" name="arr_time" value="10分" onChange={handleFilterChange} checked={filters.arr_time.includes("10分")} />
+                        10分
+                    </label>
+                    <label>
+                        <input type="checkbox" name="arr_time" value="20分" onChange={handleFilterChange} checked={filters.arr_time.includes("20分")} />
+                        20分
+                    </label>
+                    <label>
+                        <input type="checkbox" name="arr_time" value="30分以上" onChange={handleFilterChange} checked={filters.arr_time.includes("30分以上")} />
+                        30分以上
+                    </label>
                 </fieldset>
 
                 <button type="submit">Apply Filters</button>

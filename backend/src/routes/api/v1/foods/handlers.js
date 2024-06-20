@@ -7,7 +7,7 @@ import { fileTypeFromBuffer } from 'file-type';
  */
 
 export async function getAllRestaurant(req, res) {
-  const filters = req.query;
+  const filters = req.body;
   const { style = [], type = [], price = [], arr_time = [] } = filters;
 
     try {
