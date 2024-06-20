@@ -7,32 +7,24 @@ import { fileTypeFromBuffer } from 'file-type';
  */
 
 export async function getAllRestaurant(req, res) {
-  const filters = req.body;
+  const filters = req.query;
   const { style = [], type = [], price = [], arr_time = [] } = filters;
 
-    try {
-        const foods = await prisma.food.findMany({
-            where: {
-                style: {
-                    in: style.length > 0 ? style : undefined,
-                },
-                type: {
-                    in: type.length > 0 ? type : undefined,
-                },
-                price: {
-                    in: price.length > 0 ? price : undefined,
-                },
-                arr_time: {
-                    in: arr_time.length > 0 ? arr_time : undefined,
-                },
-            },
-        });
+  try {
+      const foods = await prisma.food.findMany({
+          where: {
+              style: style ? { in: Array.isArray(style) ? style : [style] } : undefined,
+              type: type ? { in: Array.isArray(type) ? type : [type] } : undefined,
+              price: price ? { in: Array.isArray(price) ? price : [price] } : undefined,
+              arr_time: arr_time ? { in: Array.isArray(arr_time) ? arr_time : [arr_time] } : undefined,
+          },
+      });
 
-        res.json(foods);
-    } catch (error) {
-        console.error('Error fetching food data:', error);
-        res.status(500).json({ error: 'An error occurred while fetching food data.' });
-    }
+      res.json(foods);
+  } catch (error) {
+      console.error('Error fetching food data:', error);
+      res.status(500).json({ error: 'An error occurred while fetching food data.' });
+  }
 }
 
 export async function createRestaurant(req, res) {
