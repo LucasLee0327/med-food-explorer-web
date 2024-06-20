@@ -5,8 +5,8 @@ export const user = {
     const { data } = await api.get("/foods");
     return data;
   },
-  async createOne({  }) {
-    const { data } = await api.post("/foods", {  });
+  async createOne({ newRestaurant }) {
+    const { data } = await api.post("/foods", { newRestaurant });
     return data;
   },
   async getOne() {

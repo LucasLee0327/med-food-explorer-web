@@ -13,7 +13,7 @@ function Finder() {
                 const food = await services.user.getAll();
                 setFoods(food);
             } catch (error) {
-                console.error('Error fetching username:', error);
+                console.error('Error fetching restaurants:', error);
             }
         }
 

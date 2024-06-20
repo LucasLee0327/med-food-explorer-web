@@ -10,6 +10,7 @@ import Finder from "./pages/Finder";
 import Draw from "./pages/Draw";
 import ErrorPage from "./pages/error-page";
 import Addnew from "./pages/Addnew";
+import AdminAdd from "./pages/AdminAdd";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/Addnew",
         element: <Addnew />,
+      },
+      {
+        path: "/AdminAdd",
+        element: <AdminAdd />,
       },
     ],
   },
