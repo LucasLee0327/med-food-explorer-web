@@ -40,9 +40,11 @@ function Draw() {
                     values.forEach(value => acc.append(key, value));
                     return acc;
                 }, new URLSearchParams())
-            ).toString();
+            );
             
-            const result = await services.user.draw(queryString, numRestaurants);
+            queryString.append('numRestaurants', numRestaurants);
+
+            const result = await services.user.draw(queryString.toString());
             setDrawnRestaurants(result);
         } catch (error) {
             console.error('Error drawing restaurants:', error);

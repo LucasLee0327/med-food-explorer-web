@@ -66,26 +66,34 @@ export async function createRestaurant(req, res) {
 }
 
 export async function drawRestaurants(req, res) {
-  const { style = [], type = [], price = [], arr_time = [], num } = req.query;
-  const numRestaurants = parseInt(num, 10) || 1;
+    const { style = [], type = [], price = [], arr_time = [], numRestaurants = 1 } = req.query;
 
-  try {
-      const filters = {
-          ...(style.length > 0 && { style: { in: style } }),
-          ...(type.length > 0 && { type: { in: type } }),
-          ...(price.length > 0 && { price: { in: price } }),
-          ...(arr_time.length > 0 && { arr_time: { in: arr_time } })
-      };
+    const filter = {};
+    if (style.length) filter.style = { in: style };
+    if (type.length) filter.type = { in: type };
+    if (price.length) filter.price = { in: price };
+    if (arr_time.length) filter.arr_time = { in: arr_time };
 
-      const allRestaurants = await prisma.food.findMany({ where: filters });
-      const shuffled = allRestaurants.sort(() => 0.5 - Math.random());
-      const selectedRestaurants = shuffled.slice(0, numRestaurants);
+    try {
+        // Find all restaurants that match the filter criteria
+        const matchedRestaurants = await prisma.food.findMany({
+            where: filter,
+        });
 
-      res.json(selectedRestaurants);
-  } catch (error) {
-      console.error('Error drawing restaurants:', error);
-      res.status(500).json({ error: 'An error occurred while drawing restaurants.' });
-  }
+        if (matchedRestaurants.length <= numRestaurants) {
+            // If the number of matched restaurants is less than or equal to numRestaurants,
+            // return all matched restaurants
+            res.json(matchedRestaurants);
+        } else {
+            // Otherwise, randomly select numRestaurants from matchedRestaurants
+            const shuffled = matchedRestaurants.sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, numRestaurants);
+            res.json(selected);
+        }
+    } catch (error) {
+        console.error('Error drawing restaurants:', error);
+        res.status(500).json({ error: 'An error occurred while drawing restaurants.' });
+    }
 }
 
 /**
