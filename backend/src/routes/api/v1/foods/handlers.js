@@ -7,24 +7,32 @@ import { fileTypeFromBuffer } from 'file-type';
  */
 
 export async function getAllRestaurant(req, res) {
-  // const filters = req.query;
-  const { style = [], type = [], price = [], arr_time = [] } = req.query;
-  console.log(filters);
-  try {
-      const foods = await prisma.food.findMany({
-        where: {
-            style: style.length > 0 ? { in: style } : undefined,
-            type: type.length > 0 ? { in: type } : undefined,
-            price: price.length > 0 ? { in: price } : undefined,
-            arr_time: arr_time.length > 0 ? { in: arr_time } : undefined,
-        },
-      });
+    // 確保將 query 參數轉換為數組，處理單個值時轉換為數組
+    const processQueryParam = param => (Array.isArray(param) ? param : param ? [param] : []);
 
-      res.json(foods);
-  } catch (error) {
-      console.error('Error fetching food data:', error);
-      res.status(500).json({ error: 'An error occurred while fetching food data.' });
-  }
+    const filters = req.query;
+    const { style, type, price, arr_time } = filters;
+
+    const styleArray = processQueryParam(style);
+    const typeArray = processQueryParam(type);
+    const priceArray = processQueryParam(price);
+    const arrTimeArray = processQueryParam(arr_time);
+
+    try {
+        const foods = await prisma.food.findMany({
+            where: {
+                style: styleArray.length > 0 ? { in: styleArray } : undefined,
+                type: typeArray.length > 0 ? { in: typeArray } : undefined,
+                price: priceArray.length > 0 ? { in: priceArray } : undefined,
+                arr_time: arrTimeArray.length > 0 ? { in: arrTimeArray } : undefined,
+            },
+        });
+
+        res.json(foods);
+    } catch (error) {
+        console.error('Error fetching food data:', error);
+        res.status(500).json({ error: 'An error occurred while fetching food data.' });
+    }
 }
 
 export async function createRestaurant(req, res) {
