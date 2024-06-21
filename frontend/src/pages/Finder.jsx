@@ -13,36 +13,37 @@ function Finder() {
     });
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        async function fetchData() {
+            try {
+                const queryString = new URLSearchParams(
+                    Object.entries(filters).reduce((acc, [key, values]) => {
+                        values.forEach(value => acc.append(key, value));
+                        return acc;
+                    }, new URLSearchParams())
+                ).toString();
 
-    const fetchData = async () => {
-        try {
-            const fetchedFoods = await services.user.getAll(filters);
-            setFoods(fetchedFoods);
-        } catch (error) {
-            console.error('Error fetching restaurants:', error);
+                const food = await services.user.getAll(queryString);
+                setFoods(food);
+            } catch (error) {
+                console.error('Error fetching restaurants:', error);
+            }
         }
-    };
 
-    const handleFilterChange = (event) => {
-        const { name, value } = event.target;
-        const isChecked = event.target.checked;
+        fetchData();
+    }, [filters]);
 
-        setFilters(prevFilters => ({
-            ...prevFilters,
-            [name]: isChecked ? [...prevFilters[name], value] : prevFilters[name].filter(item => item !== value)
-        }));
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log(filters);
-        try {
-            const filteredFoods = await services.user.getAll(filters);
-            setFoods(filteredFoods);
-        } catch (error) {
-            console.error('Error filtering restaurants:', error);
+    const handleCheckboxChange = (event, category) => {
+        const { value, checked } = event.target;
+        if (checked) {
+            setFilters(prevFilters => ({
+                ...prevFilters,
+                [category]: [...prevFilters[category], value]
+            }));
+        } else {
+            setFilters(prevFilters => ({
+                ...prevFilters,
+                [category]: prevFilters[category].filter(item => item !== value)
+            }));
         }
     };
 
@@ -53,27 +54,27 @@ function Finder() {
                 <fieldset>
                     <legend>Style:</legend>
                     <label>
-                        <input type="checkbox" name="style" value="中式" onChange={handleFilterChange} checked={filters.style.includes("中式")} />
+                        <input type="checkbox" name="style" value="中式" onChange={handleCheckboxChange} checked={filters.style.includes("中式")} />
                         中式
                     </label>
                     <label>
-                        <input type="checkbox" name="style" value="西式" onChange={handleFilterChange} checked={filters.style.includes("西式")} />
+                        <input type="checkbox" name="style" value="西式" onChange={handleCheckboxChange} checked={filters.style.includes("西式")} />
                         西式
                     </label>
                     <label>
-                        <input type="checkbox" name="style" value="日式" onChange={handleFilterChange} checked={filters.style.includes("日式")} />
+                        <input type="checkbox" name="style" value="日式" onChange={handleCheckboxChange} checked={filters.style.includes("日式")} />
                         日式
                     </label>
                     <label>
-                        <input type="checkbox" name="style" value="韓式" onChange={handleFilterChange} checked={filters.style.includes("韓式")} />
+                        <input type="checkbox" name="style" value="韓式" onChange={handleCheckboxChange} checked={filters.style.includes("韓式")} />
                         韓式
                     </label>
                     <label>
-                        <input type="checkbox" name="style" value="台式" onChange={handleFilterChange} checked={filters.style.includes("台式")} />
+                        <input type="checkbox" name="style" value="台式" onChange={handleCheckboxChange} checked={filters.style.includes("台式")} />
                         台式
                     </label>
                     <label>
-                        <input type="checkbox" name="style" value="其他" onChange={handleFilterChange} checked={filters.style.includes("其他")} />
+                        <input type="checkbox" name="style" value="其他" onChange={handleCheckboxChange} checked={filters.style.includes("其他")} />
                         其他
                     </label>
                 </fieldset>
@@ -81,19 +82,19 @@ function Finder() {
                 <fieldset>
                     <legend>Type:</legend>
                     <label>
-                        <input type="checkbox" name="type" value="飯" onChange={handleFilterChange} checked={filters.type.includes("飯")} />
+                        <input type="checkbox" name="type" value="飯" onChange={handleCheckboxChange} checked={filters.type.includes("飯")} />
                         飯
                     </label>
                     <label>
-                        <input type="checkbox" name="type" value="麵" onChange={handleFilterChange} checked={filters.type.includes("麵")} />
+                        <input type="checkbox" name="type" value="麵" onChange={handleCheckboxChange} checked={filters.type.includes("麵")} />
                         麵
                     </label>
                     <label>
-                        <input type="checkbox" name="type" value="麵包" onChange={handleFilterChange} checked={filters.type.includes("麵包")} />
+                        <input type="checkbox" name="type" value="麵包" onChange={handleCheckboxChange} checked={filters.type.includes("麵包")} />
                         麵包
                     </label>
                     <label>
-                        <input type="checkbox" name="type" value="其他" onChange={handleFilterChange} checked={filters.type.includes("其他")} />
+                        <input type="checkbox" name="type" value="其他" onChange={handleCheckboxChange} checked={filters.type.includes("其他")} />
                         其他
                     </label>
                 </fieldset>
@@ -101,15 +102,15 @@ function Finder() {
                 <fieldset>
                     <legend>Price:</legend>
                     <label>
-                        <input type="checkbox" name="price" value="便宜" onChange={handleFilterChange} checked={filters.price.includes("便宜")} />
+                        <input type="checkbox" name="price" value="便宜" onChange={handleCheckboxChange} checked={filters.price.includes("便宜")} />
                         便宜
                     </label>
                     <label>
-                        <input type="checkbox" name="price" value="中等" onChange={handleFilterChange} checked={filters.price.includes("中等")} />
+                        <input type="checkbox" name="price" value="中等" onChange={handleCheckboxChange} checked={filters.price.includes("中等")} />
                         中等
                     </label>
                     <label>
-                        <input type="checkbox" name="price" value="貴" onChange={handleFilterChange} checked={filters.price.includes("貴")} />
+                        <input type="checkbox" name="price" value="貴" onChange={handleCheckboxChange} checked={filters.price.includes("貴")} />
                         貴
                     </label>
                 </fieldset>
@@ -117,28 +118,26 @@ function Finder() {
                 <fieldset>
                     <legend>Arrival Time:</legend>
                     <label>
-                        <input type="checkbox" name="arr_time" value="馬上" onChange={handleFilterChange} checked={filters.arr_time.includes("馬上")} />
+                        <input type="checkbox" name="arr_time" value="馬上" onChange={handleCheckboxChange} checked={filters.arr_time.includes("馬上")} />
                         馬上
                     </label>
                     <label>
-                        <input type="checkbox" name="arr_time" value="5分" onChange={handleFilterChange} checked={filters.arr_time.includes("5分")} />
+                        <input type="checkbox" name="arr_time" value="5分" onChange={handleCheckboxChange} checked={filters.arr_time.includes("5分")} />
                         5分
                     </label>
                     <label>
-                        <input type="checkbox" name="arr_time" value="10分" onChange={handleFilterChange} checked={filters.arr_time.includes("10分")} />
+                        <input type="checkbox" name="arr_time" value="10分" onChange={handleCheckboxChange} checked={filters.arr_time.includes("10分")} />
                         10分
                     </label>
                     <label>
-                        <input type="checkbox" name="arr_time" value="20分" onChange={handleFilterChange} checked={filters.arr_time.includes("20分")} />
+                        <input type="checkbox" name="arr_time" value="20分" onChange={handleCheckboxChange} checked={filters.arr_time.includes("20分")} />
                         20分
                     </label>
                     <label>
-                        <input type="checkbox" name="arr_time" value="30分以上" onChange={handleFilterChange} checked={filters.arr_time.includes("30分以上")} />
+                        <input type="checkbox" name="arr_time" value="30分以上" onChange={handleCheckboxChange} checked={filters.arr_time.includes("30分以上")} />
                         30分以上
                     </label>
                 </fieldset>
-
-                <button type="submit">Apply Filters</button>
             </form>
             <div>
                 {foods.length > 0 ? (

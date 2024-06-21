@@ -1,8 +1,8 @@
 import api from "./axiosClient";
 
 export const user = {
-  async getAll(filters) {
-    const { data } = await api.get("/foods", { filters });
+  async getAll(queryString) {
+    const { data } = await api.get(`/foods?${queryString}`);
     return data;
   },
   async createOne(newRestaurant) {

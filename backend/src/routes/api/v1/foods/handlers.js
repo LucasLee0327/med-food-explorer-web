@@ -7,8 +7,8 @@ import { fileTypeFromBuffer } from 'file-type';
  */
 
 export async function getAllRestaurant(req, res) {
-  const filters = req.body;
-  const { style = [], type = [], price = [], arr_time = [] } = filters;
+  // const filters = req.query;
+  const { style = [], type = [], price = [], arr_time = [] } = req.query;
   console.log(filters);
   try {
       const foods = await prisma.food.findMany({
