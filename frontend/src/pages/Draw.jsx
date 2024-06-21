@@ -47,7 +47,7 @@ function Draw() {
             );
             queryString.append('numRestaurants', numRestaurants);
 
-            const result = await services.user.drawRestaurants(queryString.toString());
+            const result = await services.user.draw(queryString.toString());
             setDrawnRestaurants(result);
         } catch (error) {
             console.error('Error drawing restaurants:', error);
