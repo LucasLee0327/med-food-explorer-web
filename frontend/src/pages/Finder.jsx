@@ -50,7 +50,7 @@ function Finder() {
     return (
         <>
             <h1>Finder Page</h1>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <fieldset>
                     <legend>Style:</legend>
                     <label>
