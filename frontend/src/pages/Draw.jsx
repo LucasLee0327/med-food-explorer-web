@@ -42,7 +42,7 @@ function Draw() {
                 }, new URLSearchParams())
             ).toString();
             
-            const result = await services.user.drawRestaurants(queryString, numRestaurants);
+            const result = await services.user.draw(queryString, numRestaurants);
             setDrawnRestaurants(result);
         } catch (error) {
             console.error('Error drawing restaurants:', error);

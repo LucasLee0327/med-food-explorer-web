@@ -65,6 +65,29 @@ export async function createRestaurant(req, res) {
   }
 }
 
+export async function drawRestaurants(req, res) {
+  const { style = [], type = [], price = [], arr_time = [], num } = req.query;
+  const numRestaurants = parseInt(num, 10) || 1;
+
+  try {
+      const filters = {
+          ...(style.length > 0 && { style: { in: style } }),
+          ...(type.length > 0 && { type: { in: type } }),
+          ...(price.length > 0 && { price: { in: price } }),
+          ...(arr_time.length > 0 && { arr_time: { in: arr_time } })
+      };
+
+      const allRestaurants = await prisma.food.findMany({ where: filters });
+      const shuffled = allRestaurants.sort(() => 0.5 - Math.random());
+      const selectedRestaurants = shuffled.slice(0, numRestaurants);
+
+      res.json(selectedRestaurants);
+  } catch (error) {
+      console.error('Error drawing restaurants:', error);
+      res.status(500).json({ error: 'An error occurred while drawing restaurants.' });
+  }
+}
+
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
