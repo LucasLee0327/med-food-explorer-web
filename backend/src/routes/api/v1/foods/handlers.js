@@ -10,8 +10,8 @@ export async function getAllRestaurant(req, res) {
     // 確保將 query 參數轉換為數組，處理單個值時轉換為數組
     const processQueryParam = param => (Array.isArray(param) ? param : param ? [param] : []);
 
-    const filters = req.query;
-    const { style, type, price, arr_time } = filters;
+    //const filters = req.query;
+    const { style = [], type = [], price = [], arr_time = [] } = req.query;
 
     const styleArray = processQueryParam(style);
     const typeArray = processQueryParam(type);
