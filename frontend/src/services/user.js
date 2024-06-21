@@ -9,8 +9,8 @@ export const user = {
     const { data } = await api.post("/foods", { newRestaurant });
     return data;
   },
-  async draw(queryString,num) {
-    const { data } = await api.get(`/foods/draw?${queryString}&num=${num}`);
+  async draw(queryString) {
+    const { data } = await api.get(`/foods/draw?${queryString}`);
     return data;
   },
   async getOne() {

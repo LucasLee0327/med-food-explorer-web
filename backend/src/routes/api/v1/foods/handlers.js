@@ -68,11 +68,13 @@ export async function createRestaurant(req, res) {
 export async function drawRestaurants(req, res) {
     const { style = [], type = [], price = [], arr_time = [], numRestaurants = 1 } = req.query;
 
+    const parseFilter = (filter) => Array.isArray(filter) ? filter : [filter];
+
     const filter = {};
-    if (style.length) filter.style = { in: style };
-    if (type.length) filter.type = { in: type };
-    if (price.length) filter.price = { in: price };
-    if (arr_time.length) filter.arr_time = { in: arr_time };
+    if (style.length) filter.style = { in: parseFilter(style) };
+    if (type.length) filter.type = { in: parseFilter(type) };
+    if (price.length) filter.price = { in: parseFilter(price) };
+    if (arr_time.length) filter.arr_time = { in: parseFilter(arr_time) };
 
     try {
         // Find all restaurants that match the filter criteria
