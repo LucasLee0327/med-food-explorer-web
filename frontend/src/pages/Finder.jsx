@@ -13,24 +13,17 @@ function Finder() {
     });
 
     useEffect(() => {
+        // Fetch initial data
         async function fetchData() {
             try {
-                const queryString = new URLSearchParams(
-                    Object.entries(filters).reduce((acc, [key, values]) => {
-                        values.forEach(value => acc.append(key, value));
-                        return acc;
-                    }, new URLSearchParams())
-                ).toString();
-
-                const food = await services.user.getAll(queryString);
+                const food = await services.user.getAll("");
                 setFoods(food);
             } catch (error) {
                 console.error('Error fetching restaurants:', error);
             }
         }
-
         fetchData();
-    }, [filters]);
+    }, []);
 
     const handleCheckboxChange = (event, category) => {
         const { value, checked } = event.target;
@@ -47,10 +40,27 @@ function Finder() {
         }
     };
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const queryString = new URLSearchParams(
+                Object.entries(filters).reduce((acc, [key, values]) => {
+                    values.forEach(value => acc.append(key, value));
+                    return acc;
+                }, new URLSearchParams())
+            ).toString();
+
+            const food = await services.user.getAll(queryString);
+            setFoods(food);
+        } catch (error) {
+            console.error('Error fetching restaurants:', error);
+        }
+    };
+
     return (
         <>
             <h1>Finder Page</h1>
-            <form>
+            <form onSubmit={handleSubmit}> 
                 <fieldset>
                     <legend>Style:</legend>
                     <label>
@@ -138,6 +148,8 @@ function Finder() {
                         30分以上
                     </label>
                 </fieldset>
+
+                <button type="submit">Apply Filters</button>
             </form>
             <div>
                 {foods.length > 0 ? (
