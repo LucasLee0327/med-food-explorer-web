@@ -8,6 +8,7 @@ const containerStyle = {
     width: '100%',
     height: '600px'
 };
+const libraries = ['places'];
 
 function Finder() {
     const [foods, setFoods] = useState([]);
@@ -21,9 +22,9 @@ function Finder() {
 
     const apiKey = process.env.REACT_APP_GOOGLEMAP_API_KEY;
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: apiKey,
+        key: apiKey,
         id: 'google-map-script',
-        libraries: ['places']
+        libraries: libraries
     });
 
     useEffect(() => {
