@@ -20,7 +20,7 @@ function Finder() {
     });
     const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-    const apiKey = process.env.VITE_GOOGLEMAP_API_KEY;
+    const apiKey = import.meta.env.VITE_GOOGLEMAP_API_KEY;
     const { isLoaded } = useJsApiLoader({
         key: apiKey,
         id: 'google-map-script',
