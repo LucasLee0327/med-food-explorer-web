@@ -23,6 +23,7 @@ async function getGeocode(address) {
           const { lat, lng } = response.data.results[0].geometry.location;
           return { latitude: lat, longitude: lng };
       } else {
+          console.log("failed to get geocode from address.")
           return { latitude: null, longitude: null };
       }
   } catch (error) {
