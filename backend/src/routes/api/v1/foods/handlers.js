@@ -10,7 +10,6 @@ export async function getAllRestaurant(req, res) {
     // 確保將 query 參數轉換為數組，處理單個值時轉換為數組
     const processQueryParam = param => (Array.isArray(param) ? param : param ? [param] : []);
 
-    //const filters = req.query;
     const { style = [], type = [], price = [], arr_time = [] } = req.query;
 
     const styleArray = processQueryParam(style);
@@ -37,7 +36,7 @@ export async function getAllRestaurant(req, res) {
 
 export async function createRestaurant(req, res) {
   const { newRestaurant } = req.body;
-  const { name, style, type, price, arr_time } = newRestaurant;
+  const { name, style, type, price, arr_time, address } = newRestaurant;
   try {
       const existingRestaurant = await prisma.food.findUnique({
         where: {
@@ -55,7 +54,8 @@ export async function createRestaurant(req, res) {
               style:style,
               type:type,
               price:price,
-              arr_time:arr_time
+              arr_time:arr_time,
+              address:address
           }
       });
       res.status(201).json(restaurant);

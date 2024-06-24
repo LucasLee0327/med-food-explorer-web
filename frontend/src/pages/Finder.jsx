@@ -156,10 +156,11 @@ function Finder() {
                     foods.map(food => (
                         <div key={food.id}>
                             <h2>{food.name}</h2>
-                            <p>Style: {food.style}</p>
-                            <p>Type: {food.type}</p>
-                            <p>Price: {food.price}</p>
-                            <p>Arrival Time: {food.arr_time}</p>
+                            <p>料理形式: {food.style}</p>
+                            <p>料理類別: {food.type}</p>
+                            <p>價格: {food.price}</p>
+                            <p>抵達所需時間: {food.arr_time}</p>
+                            <p>地址: {food.address}</p>
                         </div>
                     ))
                 ) : (

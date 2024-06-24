@@ -134,10 +134,11 @@ function Draw() {
                     drawnRestaurants.map(restaurant => (
                         <div key={restaurant.id}>
                             <h2>{restaurant.name}</h2>
-                            <p>Style: {restaurant.style}</p>
-                            <p>Type: {restaurant.type}</p>
-                            <p>Price: {restaurant.price}</p>
-                            <p>Arrival Time: {restaurant.arr_time}</p>
+                            <p>料理形式: {restaurant.style}</p>
+                            <p>料理類別: {restaurant.type}</p>
+                            <p>價格: {restaurant.price}</p>
+                            <p>抵達所需時間: {restaurant.arr_time}</p>
+                            <p>地址: {restaurant.address}</p>
                         </div>
                     ))
                 ) : (

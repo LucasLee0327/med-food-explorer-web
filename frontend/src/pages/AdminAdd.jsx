@@ -9,7 +9,8 @@ function AdminAdd() {
         style: "中式",
         type: "飯",
         price: "便宜",
-        arr_time: "馬上"
+        arr_time: "馬上",
+        address: ""
     });
     const navigate = useNavigate();
 
@@ -68,7 +69,7 @@ function AdminAdd() {
                 </div>
                 <div>
                     <label>
-                        價錢:
+                        價格:
                         <select name="price" value={newRestaurant.price} onChange={handleChange}>
                             <option value="便宜">便宜</option>
                             <option value="中等">中等</option>
@@ -78,7 +79,7 @@ function AdminAdd() {
                 </div>
                 <div>
                     <label>
-                        時間:
+                        抵達所需時間:
                         <select name="arr_time" value={newRestaurant.arr_time} onChange={handleChange}>
                             <option value="馬上">馬上</option>
                             <option value="5分">5分</option>
@@ -86,6 +87,12 @@ function AdminAdd() {
                             <option value="20分">20分</option>
                             <option value="30以上">30以上</option>
                         </select>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        地址:
+                        <input type="text" name="address" value={newRestaurant.address} onChange={handleChange} />
                     </label>
                 </div>
                 <button type="submit">新增餐廳</button>

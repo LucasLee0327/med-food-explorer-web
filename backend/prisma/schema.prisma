@@ -20,4 +20,5 @@ model food {
   type  String
   price String
   arr_time  String
+  address String  @default("尚未上傳地址QwQ")
 } 
