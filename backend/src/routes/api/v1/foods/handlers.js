@@ -1,10 +1,35 @@
 import { prisma } from "../../../../adapters.js";
-import { fileTypeFromBuffer } from 'file-type';
+import axios from 'axios';
 
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
  */
+
+async function getGeocode(address) {
+  if (!address) {
+      return { latitude: null, longitude: null };
+  }
+
+  try {
+      const apiKey = process.env.GOOGLEMAP_API_KEY;
+      const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+          params: {
+              address,
+              key: apiKey
+          }
+      });
+      if (response.data.results.length > 0) {
+          const { lat, lng } = response.data.results[0].geometry.location;
+          return { latitude: lat, longitude: lng };
+      } else {
+          return { latitude: null, longitude: null };
+      }
+  } catch (error) {
+      console.error('Error geocoding address:', error);
+      return { latitude: null, longitude: null };
+  }
+}
 
 export async function getAllRestaurant(req, res) {
     // 確保將 query 參數轉換為數組，處理單個值時轉換為數組
@@ -47,6 +72,8 @@ export async function createRestaurant(req, res) {
       if (existingRestaurant) {
         return res.status(400).json({ message: 'Restaurant already exists.' });
       }
+
+      const { latitude, longitude } = await getGeocode(address);
       
       const restaurant = await prisma.food.create({
           data: {
@@ -55,7 +82,9 @@ export async function createRestaurant(req, res) {
               type:type,
               price:price,
               arr_time:arr_time,
-              address:address
+              address:address,
+              latitude:latitude,
+              longitude:longitude
           }
       });
       res.status(201).json(restaurant);
@@ -98,80 +127,4 @@ export async function drawRestaurants(req, res) {
     }
 }
 
-/**
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- */
-export async function getRestaurant(req, res) {
-  try {
-    const username = req.session.username;
-    if (!username) return res.status(401).json({ error: "User not authenticated" });
-
-    const user = await prisma.user.findUnique({ 
-      where: { username: username },
-      select: {
-        username: true,
-        avatar: true,
-      } });
-    if (!user) return res.status(404).json({ error: "User not found" });
-
-    return res.json(user);
-  } catch (error) {
-    console.error("Error fetching user:", error);
-    return res.status(500).json({ error: "Internal server error" });
-  }
-}
-
-/**
- * 上傳使用者頭像
- * @param {import('express').Request} req
- * @param {import('express').Response} res
- */
-export async function uploadPic(req, res) {
-  try {
-    const base64Image = req.body.avatar;
-    const username = req.session.username;
-
-    if (!username) {
-      return res.status(401).json({ message: 'User not authenticated.' });
-    }
-
-    const user = await prisma.user.findUnique({ where: { username: username } });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found.' });
-    }
-
-    // 檢查檔案類型是否為 JPEG 或 PNG
-    const isValidFormat = /^data:image\/(jpeg|png);base64,/.test(base64Image);
-    if (!isValidFormat) {
-      return res.status(400).json({ message: 'Please upload a JPEG or PNG image.' });
-    }
-    
-    const base64WithoutHeader = base64Image.substring(base64Image.indexOf(',') + 1);
-    const buffer = Buffer.from(base64WithoutHeader, 'base64');
-    const type = await fileTypeFromBuffer(buffer);
-    if (!type || (type.mime !== 'image/jpeg' && type.mime !== 'image/png')) {
-      return res.status(400).json({ message: 'Please upload a JPEG or PNG image.' });
-    }
-
-    // 更新使用者的圖片字段
-    const updatedUser = await prisma.user.update({
-      where: { username: username },
-      data: {
-        avatar: base64Image
-      },
-      select: {
-        username: true,
-        avatar: true,
-      }
-    });
-
-    // 回應成功訊息
-    res.status(200).json({ message: 'Image uploaded successfully.', user: updatedUser });
-  } catch (error) {
-    console.error('Error uploading image:', error);
-    // 返回錯誤的回應給前端
-    res.status(500).json({ message: 'Error uploading image.' });
-  }
-}
 
