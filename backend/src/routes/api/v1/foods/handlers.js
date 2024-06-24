@@ -8,22 +8,29 @@ import axios from 'axios';
 
 async function getGeocode(address) {
   if (!address) {
+      console.log("Address is empty.");
       return { latitude: null, longitude: null };
   }
 
   try {
       const apiKey = process.env.GOOGLEMAP_API_KEY;
+      console.log("Using API Key:", apiKey);
+      console.log("Geocoding address:", address);
+      
       const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
           params: {
-              address,
+              address: address,
               key: apiKey
           }
       });
-      if (response.data.results.length > 0) {
+      
+      console.log("Geocode response data:", response.data);
+
+      if (response.data.status === "OK" && response.data.results.length > 0) {
           const { lat, lng } = response.data.results[0].geometry.location;
           return { latitude: lat, longitude: lng };
       } else {
-          console.log("failed to get geocode from address.")
+          console.log("Failed to get geocode for address:", address);
           return { latitude: null, longitude: null };
       }
   } catch (error) {
