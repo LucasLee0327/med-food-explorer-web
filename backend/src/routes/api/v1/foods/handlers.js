@@ -14,8 +14,6 @@ async function getGeocode(address) {
 
   try {
       const apiKey = process.env.GOOGLEMAP_API_KEY;
-      console.log("Using API Key:", apiKey);
-      console.log("Geocoding address:", address);
       
       const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
           params: {
@@ -23,8 +21,6 @@ async function getGeocode(address) {
               key: apiKey
           }
       });
-      
-      console.log("Geocode response data:", response.data);
 
       if (response.data.status === "OK" && response.data.results.length > 0) {
           const { lat, lng } = response.data.results[0].geometry.location;
@@ -71,28 +67,30 @@ export async function createRestaurant(req, res) {
   const { newRestaurant } = req.body;
   const { name, style, type, price, arr_time, address } = newRestaurant;
   try {
-      const existingRestaurant = await prisma.food.findUnique({
-        where: {
-          name: name,
-        },
-      });
-    
-      if (existingRestaurant) {
-        return res.status(400).json({ message: 'Restaurant already exists.' });
-      }
-
       const { latitude, longitude } = await getGeocode(address);
       
-      const restaurant = await prisma.food.create({
-          data: {
-              name:name,
-              style:style,
-              type:type,
-              price:price,
-              arr_time:arr_time,
-              address:address,
-              latitude:latitude,
-              longitude:longitude
+      const restaurant = await prisma.food.upsert({
+          where: {
+            name: name,
+          },
+          update: {
+            style: style,
+            type: type,
+            price: price,
+            arr_time: arr_time,
+            address: address,
+            latitude: latitude,
+            longitude: longitude,
+          },
+          create: {
+            name: name,
+            style: style,
+            type: type,
+            price: price,
+            arr_time: arr_time,
+            address: address,
+            latitude: latitude,
+            longitude: longitude,
           }
       });
       res.status(201).json(restaurant);

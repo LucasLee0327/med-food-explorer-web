@@ -26,10 +26,10 @@ function AdminAdd() {
         e.preventDefault();
         try {
             await services.user.createOne(newRestaurant);
-            alert("Adding new restaurant succeeded!");
+            alert("Update new restaurant succeeded!");
         } catch (error) {
-            console.error('Error adding new restaurant:', error);
-            alert('Error adding new restaurant. Check if restaurant already exists or try again.');
+            console.error('Error updating new restaurant:', error);
+            alert('Error updating new restaurant. Please try again.');
         }
     };
 

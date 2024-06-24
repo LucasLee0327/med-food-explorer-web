@@ -88,7 +88,7 @@ function Finder() {
             {isFilterOpen && (
                 <form onSubmit={handleSubmit}> 
                     <fieldset>
-                        <legend>Style:</legend>
+                        <legend>料理形式:</legend>
                         {['中式', '西式', '日式', '韓式', '台式', '其他'].map(style => (
                             <label key={style}>
                                 <input
@@ -104,7 +104,7 @@ function Finder() {
                     </fieldset>
 
                     <fieldset>
-                        <legend>Type:</legend>
+                        <legend>料理類別:</legend>
                         {['飯', '麵', '麵包', '其他'].map(type => (
                             <label key={type}>
                                 <input
@@ -120,7 +120,7 @@ function Finder() {
                     </fieldset>
 
                     <fieldset>
-                        <legend>Price:</legend>
+                        <legend>價格:</legend>
                         {['便宜', '中等', '貴'].map(price => (
                             <label key={price}>
                                 <input
@@ -136,7 +136,7 @@ function Finder() {
                     </fieldset>
 
                     <fieldset>
-                        <legend>Arrival Time:</legend>
+                        <legend>抵達所需時間:</legend>
                         {['馬上', '5分', '10分', '20分', '30分以上'].map(arr_time => (
                             <label key={arr_time}>
                                 <input
@@ -151,7 +151,7 @@ function Finder() {
                         ))}
                     </fieldset>
 
-                    <button type="submit">Apply Filters</button>
+                    <button type="submit">篩選</button>
                 </form>
             )}
             <div style={{ display: 'flex' }}>
