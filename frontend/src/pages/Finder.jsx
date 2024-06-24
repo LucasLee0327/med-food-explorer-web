@@ -17,6 +17,7 @@ function Finder() {
         price: [],
         arr_time: []
     });
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const apiKey = process.env.REACT_APP_GOOGLEMAP_API_KEY;
     const { isLoaded } = useJsApiLoader({
