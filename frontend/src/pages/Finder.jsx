@@ -21,11 +21,9 @@ function Finder() {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const apiKey = import.meta.env.VITE_GOOGLEMAP_API_KEY;
-    alert(apiKey)
     const { isLoaded } = useJsApiLoader({
-        key: apiKey,
-        id: 'google-map-script',
-        libraries: libraries
+        googleMapsApiKey: apiKey,
+        id: 'google-map-script'
     });
 
     useEffect(() => {
