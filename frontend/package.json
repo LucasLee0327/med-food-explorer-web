@@ -12,6 +12,7 @@
     "@chatscope/chat-ui-kit-react": "^2.0.3",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
+    "@react-google-maps/api": "^2.19.3",
     "axios": "^1.6.8",
     "dompurify": "^3.1.0",
     "dotenv": "^16.4.5",
