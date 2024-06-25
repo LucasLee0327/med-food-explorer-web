@@ -22,7 +22,7 @@ export const user = {
     return data;
   },
   async deleteCandidate(candidateId){
-    const { data } = await api.delete(`/api/candidates/${candidateId}`);
+    const { data } = await api.delete(`/foods/candidates/${candidateId}`);
     return data;
   },
 };
