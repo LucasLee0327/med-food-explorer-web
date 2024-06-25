@@ -8,7 +8,7 @@ function About() {
           <img class="object-cover object-center rounded" alt="my selfie" src={mypic} />
         </div>
         <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-          <p class="text-4xl mb-4 text-gray-900">城中美食網</p>
+          <p class="text-4xl mb-4 text-gray-900">難餓舍</p>
                 
           <p class="my-8 leading-relaxed">
             因為在台大醫學院a.k.a.美食沙漠餓瘋了

@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout, { RootIndex } from "./pages";
 import About from "./pages/About";
 import "./index.css";
-import Map from "./pages/Map";
 import Finder from "./pages/Finder";
 import Draw from "./pages/Draw";
 import ErrorPage from "./pages/error-page";
@@ -22,10 +21,6 @@ const router = createBrowserRouter([
       {
         path: "/About",
         element: <About />,
-      },
-      {
-        path: "/Map",
-        element: <Map />,
       },
       {
         path: "/Finder",

@@ -15,7 +15,6 @@ export default function RootLayout() {
   const navigation = [
       { name: '首頁', href: '/' },
       { name: '關於本站', href: '/About' },
-      { name: '美食地圖', href: '/Map' },
       { name: '尋找美食', href: '/Finder'},
       { name: '美食抽獎', href: '/Draw'},
       { name: '新增美食', href: '/Addnew'}

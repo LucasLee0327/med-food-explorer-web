@@ -133,4 +133,38 @@ export async function drawRestaurants(req, res) {
     }
 }
 
+export async function getCandidates(req, res) {
+  try {
+    const candidates = await prisma.candidate.findMany();
+    res.status(200).json(candidates);
+  } catch (error) {
+    console.error('Error fetching candidates:', error);
+    res.status(500).json({ error: 'An error occurred while fetching candidates.' });
+  }
+}
+
+export async function createCandidate(req, res) {
+  const { newCandidate } = req.body;
+  const { name, style, type, price, arr_time, address } = newCandidate;
+
+  try {
+    const candidate = await prisma.candidate.create({
+      data: {
+        name,
+        style,
+        type,
+        price,
+        arr_time,
+        address,
+      }
+    });
+
+    res.status(201).json(candidate);
+  } catch (error) {
+    console.error('Error adding new candidate:', error);
+    res.status(500).json({ error: 'An error occurred while adding new candidate.' });
+  }
+}
+
+
 

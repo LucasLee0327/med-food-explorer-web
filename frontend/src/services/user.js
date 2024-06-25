@@ -13,12 +13,12 @@ export const user = {
     const { data } = await api.get(`/foods/draw?${queryString}`);
     return data;
   },
-  async getOne() {
-    const { data } = await api.get("/foods/profile");
+  async getCandidates() {
+    const { data } = await api.get("/foods/candidates");
     return data;
   },
-  async uploadPic({ picture }){
-    const { data } = await api.post("/users/profile", { picture });
+  async createCandidate({ newCandidate }){
+    const { data } = await api.post("/users/candidates", { newCandidate });
     return data;
   },
 };

@@ -24,3 +24,14 @@ model food {
   latitude  Float?
   longitude Float?
 } 
+
+model candidate {
+  id  Int @id @default(autoincrement())
+  name  String  
+  style String
+  type  String
+  price String
+  arr_time  String
+  address String  @default("尚未上傳地址QwQ")
+  createdAt DateTime @default(now())
+} 
