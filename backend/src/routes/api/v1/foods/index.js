@@ -7,5 +7,5 @@ router.post('/', createRestaurant);
 router.get('/draw', drawRestaurants);
 router.get('/candidates', getCandidates);
 router.post('/candidates', createCandidate);
-router.delete('/candidates:id', deleteCandidate);
+router.delete('/candidates/:id', deleteCandidate);
 export default router;
