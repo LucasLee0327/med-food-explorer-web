@@ -18,7 +18,7 @@ export const user = {
     return data;
   },
   async createCandidate({ newCandidate }){
-    const { data } = await api.post("/users/candidates", { newCandidate });
+    const { data } = await api.post("/foods/candidates", { newCandidate });
     return data;
   },
 };
