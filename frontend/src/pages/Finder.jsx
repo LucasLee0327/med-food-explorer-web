@@ -81,85 +81,12 @@ function Finder() {
 
     return (
         <>
-            <h1>Finder Page</h1>
-            <button onClick={toggleFilterMenu}>
-                {isFilterOpen ? "Hide Filters" : "Show Filters"}
-            </button>
-            {isFilterOpen && (
-                <form onSubmit={handleSubmit}> 
-                    <fieldset>
-                        <legend>料理形式:</legend>
-                        {['中式', '西式', '日式', '韓式', '台式', '其他'].map(style => (
-                            <label key={style}>
-                                <input
-                                    type="checkbox"
-                                    name="style"
-                                    value={style}
-                                    onChange={e => handleCheckboxChange(e, "style")}
-                                    checked={filters.style.includes(style)}
-                                />
-                                {style}
-                            </label>
-                        ))}
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>料理類別:</legend>
-                        {['飯', '麵', '麵包', '其他'].map(type => (
-                            <label key={type}>
-                                <input
-                                    type="checkbox"
-                                    name="type"
-                                    value={type}
-                                    onChange={e => handleCheckboxChange(e, "type")}
-                                    checked={filters.type.includes(type)}
-                                />
-                                {type}
-                            </label>
-                        ))}
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>價格:</legend>
-                        {['便宜', '中等', '貴'].map(price => (
-                            <label key={price}>
-                                <input
-                                    type="checkbox"
-                                    name="price"
-                                    value={price}
-                                    onChange={e => handleCheckboxChange(e, "price")}
-                                    checked={filters.price.includes(price)}
-                                />
-                                {price}
-                            </label>
-                        ))}
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>抵達所需時間:</legend>
-                        {['馬上', '5分', '10分', '20分', '30分以上'].map(arr_time => (
-                            <label key={arr_time}>
-                                <input
-                                    type="checkbox"
-                                    name="arr_time"
-                                    value={arr_time}
-                                    onChange={e => handleCheckboxChange(e, "arr_time")}
-                                    checked={filters.arr_time.includes(arr_time)}
-                                />
-                                {arr_time}
-                            </label>
-                        ))}
-                    </fieldset>
-
-                    <button type="submit">篩選</button>
-                </form>
-            )}
-            <div style={{ display: 'flex' }}>
-                <div style={{ flex: 1 }}>
+            <div className="flex">
+                <div className="w-1/4 h-screen overflow-y-scroll p-4 border-r border-gray-300">
                     {foods.length > 0 ? (
                         foods.map(food => (
-                            <div key={food.id}>
-                                <h2>{food.name}</h2>
+                            <div key={food.id} className="mb-4 p-4 bg-white shadow rounded">
+                                <h2 className="text-xl font-bold">{food.name}</h2>
                                 <p>料理形式: {food.style}</p>
                                 <p>料理類別: {food.type}</p>
                                 <p>價格: {food.price}</p>
@@ -170,8 +97,14 @@ function Finder() {
                     ) : (
                         <p>No food items available.</p>
                     )}
+                    <button
+                        className="absolute top-1/2 right-0 transform translate-x-1/2 bg-blue-500 text-white px-2 py-1 rounded"
+                        onClick={toggleFilterMenu}
+                    >
+                        {isFilterOpen ? "<<" : ">>"}
+                    </button>
                 </div>
-                <div style={{ flex: 1 }}>
+                <div className="w-3/4 h-screen">
                     <GoogleMap
                         mapContainerStyle={containerStyle}
                         center={{ lat: 25.0330, lng: 121.5654 }}
@@ -191,6 +124,83 @@ function Finder() {
                         ))}
                     </GoogleMap>
                 </div>
+                {isFilterOpen && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end z-50">
+                        <div className="bg-white w-1/4 h-full p-4 shadow-lg">
+                            <form onSubmit={handleSubmit}> 
+                                <fieldset className="mb-4">
+                                    <legend className="text-lg font-bold mb-2">料理形式:</legend>
+                                    {['中式', '西式', '日式', '韓式', '台式', '其他'].map(style => (
+                                        <label key={style} className="block mb-2">
+                                            <input
+                                                type="checkbox"
+                                                name="style"
+                                                value={style}
+                                                onChange={e => handleCheckboxChange(e, "style")}
+                                                checked={filters.style.includes(style)}
+                                                className="mr-2"
+                                            />
+                                            {style}
+                                        </label>
+                                    ))}
+                                </fieldset>
+
+                                <fieldset className="mb-4">
+                                    <legend className="text-lg font-bold mb-2">料理類別:</legend>
+                                    {['飯', '麵', '麵包', '其他'].map(type => (
+                                        <label key={type} className="block mb-2">
+                                            <input
+                                                type="checkbox"
+                                                name="type"
+                                                value={type}
+                                                onChange={e => handleCheckboxChange(e, "type")}
+                                                checked={filters.type.includes(type)}
+                                                className="mr-2"
+                                            />
+                                            {type}
+                                        </label>
+                                    ))}
+                                </fieldset>
+
+                                <fieldset className="mb-4">
+                                    <legend className="text-lg font-bold mb-2">價格:</legend>
+                                    {['便宜', '中等', '貴'].map(price => (
+                                        <label key={price} className="block mb-2">
+                                            <input
+                                                type="checkbox"
+                                                name="price"
+                                                value={price}
+                                                onChange={e => handleCheckboxChange(e, "price")}
+                                                checked={filters.price.includes(price)}
+                                                className="mr-2"
+                                            />
+                                            {price}
+                                        </label>
+                                    ))}
+                                </fieldset>
+
+                                <fieldset className="mb-4">
+                                    <legend className="text-lg font-bold mb-2">抵達所需時間:</legend>
+                                    {['馬上', '5分', '10分', '20分', '30分以上'].map(arr_time => (
+                                        <label key={arr_time} className="block mb-2">
+                                            <input
+                                                type="checkbox"
+                                                name="arr_time"
+                                                value={arr_time}
+                                                onChange={e => handleCheckboxChange(e, "arr_time")}
+                                                checked={filters.arr_time.includes(arr_time)}
+                                                className="mr-2"
+                                            />
+                                            {arr_time}
+                                        </label>
+                                    ))}
+                                </fieldset>
+
+                                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">篩選</button>
+                            </form>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     );

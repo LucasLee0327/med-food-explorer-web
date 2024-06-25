@@ -1,4 +1,4 @@
-import mypic from './pikachu-surprised.jpg'
+import mypic from './food-web-meme.png'
 
 function About() {
   return(
