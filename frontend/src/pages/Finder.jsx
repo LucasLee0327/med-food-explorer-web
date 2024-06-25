@@ -94,7 +94,10 @@ function Finder() {
         )}
       </div>
       <button
-        className={`fixed top-1/2 right-0 transform -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded transition-transform duration-300 z-50 ${isFilterOpen ? 'translate-x-64' : ''}`}
+        className={`absolute top-1/2 transform -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded transition-transform duration-300 z-50 ${
+          isFilterOpen ? 'translate-x-full' : ''
+        }`}
+        style={{ left: 'calc(25% - 0.5rem)' }}
         onClick={toggleFilterMenu}
       >
         <i className={`fas fa-chevron-right fa-2x ${isFilterOpen ? 'rotate-180' : ''}`}></i>
@@ -120,7 +123,10 @@ function Finder() {
         </GoogleMap>
       </div>
       <div
-        className={`fixed top-0 right-0 bg-white w-1/4 h-full shadow-lg transition-transform duration-300 z-40 ${isFilterOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`absolute top-0 h-full bg-white w-1/4 shadow-lg transition-transform duration-300 z-40 ${
+          isFilterOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+        style={{ left: '25%' }}
       >
         <div className="p-4 overflow-y-auto h-full">
           <form onSubmit={handleSubmit}>
