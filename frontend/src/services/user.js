@@ -17,8 +17,12 @@ export const user = {
     const { data } = await api.get("/foods/candidates");
     return data;
   },
-  async createCandidate({ newCandidate }){
+  async createCandidate(newCandidate){
     const { data } = await api.post("/foods/candidates", { newCandidate });
+    return data;
+  },
+  async deleteCandidate(candidateId){
+    const { data } = await api.delete(`/api/candidates/${candidateId}`);
     return data;
   },
 };

@@ -166,5 +166,19 @@ export async function createCandidate(req, res) {
   }
 }
 
+export async function deleteCandidate(req, res) {
+  const { id } = req.params;
+
+  try {
+    await prisma.candidate.delete({
+      where: { id: parseInt(id, 10) }
+    });
+    res.status(204).end();
+  } catch (error) {
+    console.error('Error deleting candidate:', error);
+    res.status(500).json({ error: 'An error occurred while deleting candidate.' });
+  }
+}
+
 
 
