@@ -81,7 +81,7 @@ function Finder() {
 
     return (
         <div className="flex">
-            <div className="relative w-1/4 h-screen overflow-y-scroll p-4 border-r border-gray-300">
+            <div className="relative w-1/4 h-screen overflow-y-scroll p-4 border-r border-gray-300 scrollbar-hide">
                 {foods.length > 0 ? (
                     foods.map(food => (
                         <div key={food.id} className="mb-4 p-4 bg-white shadow rounded">
@@ -97,7 +97,7 @@ function Finder() {
                     <p>No food items available.</p>
                 )}
                 <button
-                    className={`absolute top-1/2 right-0 transform ${isFilterOpen ? 'translate-x-full' : 'translate-x-1/2'} bg-blue-500 text-white px-2 py-1 rounded transition-transform duration-300`}
+                    className={`fixed top-1/2 right-0 transform -translate-y-1/2 bg-blue-500 text-white px-2 py-1 rounded transition-transform duration-300 ${isFilterOpen ? 'translate-x-32' : ''}`}
                     onClick={toggleFilterMenu}
                 >
                     {isFilterOpen ? "<<" : ">>"}
@@ -125,7 +125,7 @@ function Finder() {
             </div>
             {isFilterOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end z-50">
-                    <div className="bg-white w-1/4 h-full p-4 shadow-lg">
+                    <div className="bg-white w-1/4 h-full p-4 shadow-lg overflow-y-auto">
                         <form onSubmit={handleSubmit}> 
                             <fieldset className="mb-4">
                                 <legend className="text-lg font-bold mb-2">料理形式:</legend>
