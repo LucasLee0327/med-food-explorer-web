@@ -63,74 +63,85 @@ function Draw() {
                     <form onSubmit={handleSubmit} className="space-y-4">
                     <fieldset className="border p-4 rounded-lg">
                         <legend className="text-lg font-bold mb-2">料理形式:</legend>
-                        {['中式', '西式', '日式', '韓式', '台式', '其他'].map(style => (
-                        <label key={style} className="block mb-2">
-                            <input
-                            type="checkbox"
-                            name="style"
-                            value={style}
-                            onChange={e => handleCheckboxChange(e, "style")}
-                            checked={filters.style.includes(style)}
-                            className="mr-2"
-                            />
-                            {style}
-                        </label>
-                        ))}
+                        <div className="grid grid-cols-3 gap-2">
+                            {['中式', '西式', '日式', '韓式', '台式', '其他'].map(style => (
+                            <label key={style} className="block mb-2">
+                                <input
+                                type="checkbox"
+                                name="style"
+                                value={style}
+                                onChange={e => handleCheckboxChange(e, "style")}
+                                checked={filters.style.includes(style)}
+                                className="mr-2"
+                                />
+                                {style}
+                            </label>
+                            ))}
+                        </div>
                     </fieldset>
 
                     <fieldset className="border p-4 rounded-lg">
                         <legend className="text-lg font-bold mb-2">料理類別:</legend>
-                        {['飯', '麵', '麵包', '其他'].map(type => (
-                        <label key={type} className="block mb-2">
-                            <input
-                            type="checkbox"
-                            name="type"
-                            value={type}
-                            onChange={e => handleCheckboxChange(e, "type")}
-                            checked={filters.type.includes(type)}
-                            className="mr-2"
-                            />
-                            {type}
-                        </label>
-                        ))}
+                        <div className="grid grid-cols-3 gap-2">
+                            {['飯', '麵', '麵包', '其他'].map(type => (
+                            <label key={type} className="block mb-2">
+                                <input
+                                type="checkbox"
+                                name="type"
+                                value={type}
+                                onChange={e => handleCheckboxChange(e, "type")}
+                                checked={filters.type.includes(type)}
+                                className="mr-2"
+                                />
+                                {type}
+                            </label>
+                            ))}
+                        </div>
+                        
                     </fieldset>
 
                     <fieldset className="border p-4 rounded-lg">
                         <legend className="text-lg font-bold mb-2">價格:</legend>
-                        {['便宜', '中等', '貴'].map(price => (
-                        <label key={price} className="block mb-2">
-                            <input
-                            type="checkbox"
-                            name="price"
-                            value={price}
-                            onChange={e => handleCheckboxChange(e, "price")}
-                            checked={filters.price.includes(price)}
-                            className="mr-2"
-                            />
-                            {price}
-                        </label>
-                        ))}
+                        <div className="grid grid-cols-3 gap-2">
+                            {['便宜', '中等', '貴'].map(price => (
+                            <label key={price} className="block mb-2">
+                                <input
+                                type="checkbox"
+                                name="price"
+                                value={price}
+                                onChange={e => handleCheckboxChange(e, "price")}
+                                checked={filters.price.includes(price)}
+                                className="mr-2"
+                                />
+                                {price}
+                            </label>
+                            ))}
+                        </div>
+                        
                     </fieldset>
 
                     <fieldset className="border p-4 rounded-lg">
                         <legend className="text-lg font-bold mb-2">抵達所需時間:</legend>
-                        {['馬上', '5分', '10分', '20分', '30分以上'].map(time => (
-                        <label key={time} className="block mb-2">
-                            <input
-                            type="checkbox"
-                            name="arr_time"
-                            value={time}
-                            onChange={e => handleCheckboxChange(e, "arr_time")}
-                            checked={filters.arr_time.includes(time)}
-                            className="mr-2"
-                            />
-                            {time}
-                        </label>
-                        ))}
+                        <div className="grid grid-cols-3 gap-2">
+                            {['馬上', '5分', '10分', '20分', '30分以上'].map(time => (
+                            <label key={time} className="block mb-2">
+                                <input
+                                type="checkbox"
+                                name="arr_time"
+                                value={time}
+                                onChange={e => handleCheckboxChange(e, "arr_time")}
+                                checked={filters.arr_time.includes(time)}
+                                className="mr-2"
+                                />
+                                {time}
+                            </label>
+                            ))}
+                        </div>
+                        
                     </fieldset>
 
                     <div className="border p-4 rounded-lg">
-                        <label className="block mb-2">
+                        <label className="block mb-2 font-bold">
                         想抽幾個餐廳?
                         <input
                             type="number"
