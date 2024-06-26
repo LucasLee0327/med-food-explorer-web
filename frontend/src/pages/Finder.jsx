@@ -98,7 +98,7 @@ function Finder() {
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={{ lat: 25.0409803, lng: 121.521604 }}
-                    zoom={20}
+                    zoom={15}
                 >
                 {foods.map(food => (
                     food.latitude && food.longitude && (

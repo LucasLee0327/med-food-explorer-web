@@ -56,94 +56,116 @@ function Draw() {
 
     return (
         <>
-            <h1>Draw page for difficult-chooser</h1>
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <legend>Style:</legend>
-                    {['中式', '西式', '日式', '韓式', '台式', '其他'].map(style => (
-                        <label key={style}>
+            <div className="flex h-screen">
+                {/* 左側篩選表單區塊 */}
+                <div className="w-1/3 p-4 border-r border-gray-300 bg-gray-100">
+                    <h1 className="text-2xl font-bold mb-4">篩選條件</h1>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <fieldset className="border p-4 rounded-lg">
+                        <legend className="text-lg font-bold mb-2">料理形式:</legend>
+                        {['中式', '西式', '日式', '韓式', '台式', '其他'].map(style => (
+                        <label key={style} className="block mb-2">
                             <input
-                                type="checkbox"
-                                name="style"
-                                value={style}
-                                onChange={e => handleCheckboxChange(e, "style")}
-                                checked={filters.style.includes(style)}
+                            type="checkbox"
+                            name="style"
+                            value={style}
+                            onChange={e => handleCheckboxChange(e, "style")}
+                            checked={filters.style.includes(style)}
+                            className="mr-2"
                             />
                             {style}
                         </label>
-                    ))}
-                </fieldset>
+                        ))}
+                    </fieldset>
 
-                <fieldset>
-                    <legend>Type:</legend>
-                    {['飯', '麵', '麵包', '其他'].map(type => (
-                        <label key={type}>
+                    <fieldset className="border p-4 rounded-lg">
+                        <legend className="text-lg font-bold mb-2">料理類別:</legend>
+                        {['飯', '麵', '麵包', '其他'].map(type => (
+                        <label key={type} className="block mb-2">
                             <input
-                                type="checkbox"
-                                name="type"
-                                value={type}
-                                onChange={e => handleCheckboxChange(e, "type")}
-                                checked={filters.type.includes(type)}
+                            type="checkbox"
+                            name="type"
+                            value={type}
+                            onChange={e => handleCheckboxChange(e, "type")}
+                            checked={filters.type.includes(type)}
+                            className="mr-2"
                             />
                             {type}
                         </label>
-                    ))}
-                </fieldset>
+                        ))}
+                    </fieldset>
 
-                <fieldset>
-                    <legend>Price:</legend>
-                    {['便宜', '中等', '貴'].map(price => (
-                        <label key={price}>
+                    <fieldset className="border p-4 rounded-lg">
+                        <legend className="text-lg font-bold mb-2">價格:</legend>
+                        {['便宜', '中等', '貴'].map(price => (
+                        <label key={price} className="block mb-2">
                             <input
-                                type="checkbox"
-                                name="price"
-                                value={price}
-                                onChange={e => handleCheckboxChange(e, "price")}
-                                checked={filters.price.includes(price)}
+                            type="checkbox"
+                            name="price"
+                            value={price}
+                            onChange={e => handleCheckboxChange(e, "price")}
+                            checked={filters.price.includes(price)}
+                            className="mr-2"
                             />
                             {price}
                         </label>
-                    ))}
-                </fieldset>
+                        ))}
+                    </fieldset>
 
-                <fieldset>
-                    <legend>Arrival Time:</legend>
-                    {['馬上', '5分', '10分', '20分', '30分以上'].map(time => (
-                        <label key={time}>
+                    <fieldset className="border p-4 rounded-lg">
+                        <legend className="text-lg font-bold mb-2">抵達所需時間:</legend>
+                        {['馬上', '5分', '10分', '20分', '30分以上'].map(time => (
+                        <label key={time} className="block mb-2">
                             <input
-                                type="checkbox"
-                                name="arr_time"
-                                value={time}
-                                onChange={e => handleCheckboxChange(e, "arr_time")}
-                                checked={filters.arr_time.includes(time)}
+                            type="checkbox"
+                            name="arr_time"
+                            value={time}
+                            onChange={e => handleCheckboxChange(e, "arr_time")}
+                            checked={filters.arr_time.includes(time)}
+                            className="mr-2"
                             />
                             {time}
                         </label>
-                    ))}
-                </fieldset>
+                        ))}
+                    </fieldset>
 
-                <label>
-                    Number of restaurants to draw:
-                    <input type="number" value={numRestaurants} onChange={handleNumRestaurantsChange} min="1" />
-                </label>
-                
-                <button type="submit">Draw Restaurants</button>
-            </form>
-            <div>
-                {drawnRestaurants.length > 0 ? (
-                    drawnRestaurants.map(restaurant => (
-                        <div key={restaurant.id}>
-                            <h2>{restaurant.name}</h2>
+                    <div className="border p-4 rounded-lg">
+                        <label className="block mb-2">
+                        想抽幾個餐廳?
+                        <input
+                            type="number"
+                            value={numRestaurants}
+                            onChange={handleNumRestaurantsChange}
+                            min="1"
+                            className="ml-2 p-1 border rounded"
+                        />
+                        </label>
+                    </div>
+
+                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">抽獎</button>
+                    </form>
+                </div>
+
+                {/* 右側抽獎結果區塊 */}
+                <div className="w-2/3 p-4 overflow-y-auto">
+                    <h1 className="text-2xl font-bold mb-4">抽獎結果</h1>
+                    <div>
+                    {drawnRestaurants.length > 0 ? (
+                        drawnRestaurants.map(restaurant => (
+                        <div key={restaurant.id} className="mb-4 p-4 bg-white shadow rounded">
+                            <h2 className="text-xl font-bold">{restaurant.name}</h2>
                             <p>料理形式: {restaurant.style}</p>
                             <p>料理類別: {restaurant.type}</p>
                             <p>價格: {restaurant.price}</p>
                             <p>抵達所需時間: {restaurant.arr_time}</p>
                             <p>地址: {restaurant.address}</p>
                         </div>
-                    ))
-                ) : (
-                    <p>No restaurants drawn.</p>
-                )}
+                        ))
+                    ) : (
+                        <p>No restaurants drawn.</p>
+                    )}
+                    </div>
+                </div>
             </div>
         </>
     );

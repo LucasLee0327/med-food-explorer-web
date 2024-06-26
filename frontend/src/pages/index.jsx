@@ -118,7 +118,7 @@ export function RootIndex() {
       </div>
       <div className="flex justify-center">
         <a href="https://www.youtube.com/watch?v=yQgN0A0WCzE" target="_blank">
-          <img src={homeicon} className="w-52 logo" />
+          <img src={homeicon} className="w-80 logo" />
         </a>
       </div>
     </div>
