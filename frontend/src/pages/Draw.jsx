@@ -58,7 +58,7 @@ function Draw() {
         <>
             <div className="flex h-screen">
                 {/* 左側篩選表單區塊 */}
-                <div className="w-1/3 p-4 border-r border-gray-300 bg-gray-100">
+                <div className="w-1/3 p-4 border-r border-gray-300 bg-gray-100 overflow-y-auto h-full">
                     <h1 className="text-2xl font-bold mb-4">篩選條件</h1>
                     <form onSubmit={handleSubmit} className="space-y-4">
                     <fieldset className="border p-4 rounded-lg">
