@@ -96,9 +96,9 @@ function Finder() {
             </div>
             <div className="w-3/4 h-full">
                 <GoogleMap
-                mapContainerStyle={containerStyle}
-                center={{ lat: 25.0409803, lng: 121.521604 }}
-                zoom={30}
+                    mapContainerStyle={containerStyle}
+                    center={{ lat: 25.0409803, lng: 121.521604 }}
+                    zoom={12}
                 >
                 {foods.map(food => (
                     food.latitude && food.longitude && (
@@ -122,10 +122,11 @@ function Finder() {
             style={{ zIndex: 1000 }}
         >
             <button
-            className="absolute left-0 top-1/2 transform -translate-x-full -translate-y-1/2 bg-blue-500 text-white px-4 py-2 rounded-r-lg"
-            onClick={toggleFilterMenu}
+                className="absolute left-0 top-1/2 transform -translate-x-full -translate-y-1/2 bg-white text-black font-bold py-2 px-4 border rounded-r-lg"
+                onClick={toggleFilterMenu}
+                style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
             >
-            {isFilterOpen ? '收回' : '篩選條件'}
+                篩選條件
             </button>
             <form onSubmit={handleSubmit}>
             <fieldset>
