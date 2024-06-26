@@ -72,7 +72,7 @@ function Finder() {
   };
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <div>餐廳列表加載所需時間視Render平台心情，請耐心等候...</div>;
   }
 
   return (
@@ -98,7 +98,7 @@ function Finder() {
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={{ lat: 25.0409803, lng: 121.521604 }}
-                    zoom={12}
+                    zoom={20}
                 >
                 {foods.map(food => (
                     food.latitude && food.longitude && (
@@ -116,17 +116,17 @@ function Finder() {
             </div>
         </div>
         <div
-            className={`fixed top-0 right-0 w-1/4 h-full bg-gray-200 p-4 shadow-lg transition-transform transform ${
+            className={`fixed top-0 right-0 w-1/4 h-full bg-white p-4 shadow-lg transition-transform transform ${
             isFilterOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
             style={{ zIndex: 1000 }}
         >
             <button
-                className="absolute left-0 top-1/2 transform -translate-x-full -translate-y-1/2 bg-white text-black font-bold py-2 px-4 border rounded-r-lg"
+                className="absolute left-0 top-1/2 transform -translate-x-full -translate-y-1/2 bg-white text-black font-bold py-2 px-4 border rounded-l-lg"
                 onClick={toggleFilterMenu}
                 style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
             >
-                篩選條件
+                {isFilterOpen ? '收回' : '篩選條件'}
             </button>
             <form onSubmit={handleSubmit}>
             <fieldset>
