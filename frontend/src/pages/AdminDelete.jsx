@@ -9,7 +9,7 @@ function AdminDelete() {
     useEffect(() => {
         async function fetchRestaurants() {
             try {
-                const data = await services.user.getRestaurants();
+                const data = await services.user.getAll();
                 setRestaurants(data);
             } catch (error) {
                 console.error('Error fetching restaurants:', error);
