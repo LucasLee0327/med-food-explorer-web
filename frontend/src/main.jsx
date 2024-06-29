@@ -10,6 +10,7 @@ import Draw from "./pages/Draw";
 import ErrorPage from "./pages/error-page";
 import Addnew from "./pages/Addnew";
 import AdminAdd from "./pages/AdminAdd";
+import AdminDelete from "./pages/AdminDelete";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/AdminAdd",
         element: <AdminAdd />,
+      },
+      {
+        path: "/AdminDelete",
+        element: <AdminDelete />,
       },
     ],
   },
