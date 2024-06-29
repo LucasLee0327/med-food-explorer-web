@@ -137,73 +137,83 @@ function Finder() {
                 {isFilterOpen ? '收回' : '篩選條件'}
             </button>
             <form onSubmit={handleSubmit}>
-            <fieldset>
-                <legend className="font-bold">料理形式:</legend>
-                {['中式', '西式', '日式', '韓式', '台式', '其他'].map((style) => (
-                <label key={style} className="block">
-                    <input
-                    type="checkbox"
-                    name="style"
-                    value={style}
-                    onChange={(e) => handleCheckboxChange(e, 'style')}
-                    checked={filters.style.includes(style)}
-                    />
-                    {style}
-                </label>
-                ))}
-            </fieldset>
+              <fieldset>
+                  <legend className="font-bold">料理形式:</legend>
+                  <div className="grid grid-cols-3 gap-2">
+                    {['中式', '西式', '日式', '韓式', '台式', '其他'].map((style) => (
+                    <label key={style} className="block">
+                        <input
+                        type="checkbox"
+                        name="style"
+                        value={style}
+                        onChange={(e) => handleCheckboxChange(e, 'style')}
+                        checked={filters.style.includes(style)}
+                        />
+                        {style}
+                    </label>
+                    ))}
+                  </div>
+              </fieldset>
 
-            <fieldset>
-                <legend className="font-bold">料理類別:</legend>
-                {['飯', '麵', '速食', '素食', '火鍋', '拉麵', '簡餐', '合菜', '其他'].map((type) => (
-                <label key={type} className="block">
-                    <input
-                    type="checkbox"
-                    name="type"
-                    value={type}
-                    onChange={(e) => handleCheckboxChange(e, 'type')}
-                    checked={filters.type.includes(type)}
-                    />
-                    {type}
-                </label>
-                ))}
-            </fieldset>
+              <fieldset>
+                  <legend className="font-bold">料理類別:</legend>
+                  <div className="grid grid-cols-3 gap-2">
+                    {['飯', '麵', '速食', '素食', '火鍋', '拉麵', '簡餐', '合菜', '其他'].map((type) => (
+                    <label key={type} className="block">
+                        <input
+                        type="checkbox"
+                        name="type"
+                        value={type}
+                        onChange={(e) => handleCheckboxChange(e, 'type')}
+                        checked={filters.type.includes(type)}
+                        />
+                        {type}
+                    </label>
+                    ))}
+                  </div>
+              </fieldset>
 
-            <fieldset>
-                <legend className="font-bold">價格:</legend>
-                {['便宜', '中等', '貴'].map((price) => (
-                <label key={price} className="block">
-                    <input
-                    type="checkbox"
-                    name="price"
-                    value={price}
-                    onChange={(e) => handleCheckboxChange(e, 'price')}
-                    checked={filters.price.includes(price)}
-                    />
-                    {price}
-                </label>
-                ))}
-            </fieldset>
+              <fieldset>
+                  <legend className="font-bold">價格:</legend>
+                  <div className="grid grid-cols-3 gap-2">
+                    {['便宜', '中等', '貴'].map((price) => (
+                    <label key={price} className="block">
+                        <input
+                        type="checkbox"
+                        name="price"
+                        value={price}
+                        onChange={(e) => handleCheckboxChange(e, 'price')}
+                        checked={filters.price.includes(price)}
+                        />
+                        {price}
+                    </label>
+                    ))}
+                  </div>
+                  
+              </fieldset>
 
-            <fieldset>
-                <legend className="font-bold">抵達所需時間:</legend>
-                {['馬上', '5分', '10分', '20分', '30分以上'].map((arr_time) => (
-                <label key={arr_time} className="block">
-                    <input
-                    type="checkbox"
-                    name="arr_time"
-                    value={arr_time}
-                    onChange={(e) => handleCheckboxChange(e, 'arr_time')}
-                    checked={filters.arr_time.includes(arr_time)}
-                    />
-                    {arr_time}
-                </label>
-                ))}
-            </fieldset>
+              <fieldset>
+                  <legend className="font-bold">抵達所需時間:</legend>
+                  <div className="grid grid-cols-3 gap-2">
+                    {['馬上', '5分', '10分', '20分', '30分以上'].map((arr_time) => (
+                    <label key={arr_time} className="block">
+                        <input
+                        type="checkbox"
+                        name="arr_time"
+                        value={arr_time}
+                        onChange={(e) => handleCheckboxChange(e, 'arr_time')}
+                        checked={filters.arr_time.includes(arr_time)}
+                        />
+                        {arr_time}
+                    </label>
+                    ))}
+                  </div>
+                  
+              </fieldset>
 
-            <button type="submit" className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
-                篩選
-            </button>
+              <button type="submit" className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+                  篩選
+              </button>
             </form>
         </div>
     </>
