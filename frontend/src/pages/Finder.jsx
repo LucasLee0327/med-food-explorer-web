@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
 import services from '../services';
 
@@ -16,6 +16,7 @@ function Finder() {
     arr_time: []
   });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const mapRef = useRef(null);
 
   const apiKey = import.meta.env.VITE_GOOGLEMAP_API_KEY;
   const { isLoaded } = useJsApiLoader({
