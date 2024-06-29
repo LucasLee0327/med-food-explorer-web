@@ -12,6 +12,13 @@ function Draw() {
     });
     const [numRestaurants, setNumRestaurants] = useState(1);
     const [drawnRestaurants, setDrawnRestaurants] = useState([]);
+    const [selectedRestaurant, setSelectedRestaurant] = useState(null);
+
+    const apiKey = import.meta.env.VITE_GOOGLEMAP_API_KEY;
+    const { isLoaded } = useJsApiLoader({
+        googleMapsApiKey: apiKey,
+        id: 'google-map-script',
+    });
 
     const handleCheckboxChange = (event, category) => {
         const { value, checked } = event.target;
@@ -52,6 +59,14 @@ function Draw() {
         } catch (error) {
             console.error('Error drawing restaurants:', error);
         }
+    };
+
+    const handleRestaurantClick = (restaurant) => {
+        setSelectedRestaurant(restaurant);
+    };
+    
+    const closePopup = () => {
+        setSelectedRestaurant(null);
     };
 
     return (
@@ -163,7 +178,7 @@ function Draw() {
                     <div>
                     {drawnRestaurants.length > 0 ? (
                         drawnRestaurants.map(restaurant => (
-                        <div key={restaurant.id} className="mb-4 p-4 bg-white shadow rounded">
+                        <div key={restaurant.id} className="mb-4 p-4 bg-white shadow rounded cursor-pointer" onClick={() => handleRestaurantClick(restaurant)}>
                             <h2 className="text-xl font-bold">{restaurant.name}</h2>
                             <p>料理形式: {restaurant.style}</p>
                             <p>料理類別: {restaurant.type}</p>
@@ -178,6 +193,39 @@ function Draw() {
                     </div>
                 </div>
             </div>
+
+            {selectedRestaurant && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white p-4 rounded shadow-lg w-3/4 h-3/4 relative">
+                        <button
+                        className="absolute top-2 right-2 text-black font-bold"
+                        onClick={closePopup}
+                        >
+                        &times;
+                        </button>
+                        <h2 className="text-xl font-bold mb-4">{selectedRestaurant.name}</h2>
+                        <p>料理形式: {selectedRestaurant.style}</p>
+                        <p>料理類別: {selectedRestaurant.type}</p>
+                        <p>價格: {selectedRestaurant.price}</p>
+                        <p>抵達所需時間: {selectedRestaurant.arr_time}</p>
+                        <p>地址: {selectedRestaurant.address}</p>
+                        {isLoaded && (
+                        <GoogleMap
+                            mapContainerStyle={containerStyle}
+                            center={{ lat: selectedRestaurant.latitude, lng: selectedRestaurant.longitude }}
+                            zoom={16}
+                        >
+                            <Marker
+                            position={{
+                                lat: selectedRestaurant.latitude,
+                                lng: selectedRestaurant.longitude,
+                            }}
+                            />
+                        </GoogleMap>
+                        )}
+                    </div>
+                </div>
+            )}
         </>
     );
 }
