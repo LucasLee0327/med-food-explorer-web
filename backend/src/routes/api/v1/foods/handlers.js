@@ -100,6 +100,31 @@ export async function createRestaurant(req, res) {
   }
 }
 
+export async function deleteRestaurant(req, res) {
+  const { id } = req.params;
+
+  try {
+    const restaurantId = parseInt(id, 10);
+    if (isNaN(restaurantId)) {
+      return res.status(400).json({ error: 'Invalid restaurant ID.' });
+    }
+
+    await prisma.food.delete({
+      where: { id: restaurantId },
+    });
+
+    res.status(204).end();
+  } catch (error) {
+    console.error('Error deleting restaurant:', error);
+
+    if (error.code === 'P2025') {  // Prisma's specific error code for record not found
+      return res.status(404).json({ error: 'Restaurant not found.' });
+    }
+
+    res.status(500).json({ error: 'An error occurred while deleting the restaurant.' });
+  }
+}
+
 export async function drawRestaurants(req, res) {
     const { style = [], type = [], price = [], arr_time = [], numRestaurants = 1 } = req.query;
 

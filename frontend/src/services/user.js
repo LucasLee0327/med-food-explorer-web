@@ -9,6 +9,10 @@ export const user = {
     const { data } = await api.post("/foods", { newRestaurant });
     return data;
   },
+  async deleteOne(selectedRestaurantId) {
+    const { data } = await api.delete(`/foods/${selectedRestaurantId}`);
+    return data;
+  },
   async draw(queryString) {
     const { data } = await api.get(`/foods/draw?${queryString}`);
     return data;
