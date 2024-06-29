@@ -4,6 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
 import services from "../services";
 
+const containerStyle = {
+    width: '100%',
+    height: '600px'
+};
+
 function Draw() {
     const [filters, setFilters] = useState({
         style: [],
