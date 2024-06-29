@@ -155,7 +155,7 @@ function Finder() {
 
             <fieldset>
                 <legend className="font-bold">料理類別:</legend>
-                {['飯', '麵', '麵包', '其他'].map((type) => (
+                {['飯', '麵', '速食', '素食', '火鍋', '拉麵', '簡餐', '合菜', '其他'].map((type) => (
                 <label key={type} className="block">
                     <input
                     type="checkbox"

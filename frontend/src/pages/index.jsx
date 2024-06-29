@@ -17,7 +17,7 @@ export default function RootLayout() {
       { name: '關於本站', href: '/About' },
       { name: '尋找美食', href: '/Finder'},
       { name: '美食抽獎', href: '/Draw'},
-      { name: '新增美食', href: '/Addnew'}
+      { name: '投稿餐廳', href: '/Addnew'}
     ];
 
   return (
@@ -117,7 +117,7 @@ export function RootIndex() {
         <h1 className="text-4xl block">給迷茫晚餐吃什麼的你</h1>
       </div>
       <div className="flex justify-center">
-        <a href="https://www.youtube.com/watch?v=yQgN0A0WCzE" target="_blank">
+        <a href="https://www.youtube.com/watch?v=t_KdbASIkB8" target="_blank">
           <img src={homeicon} className="w-80 logo" />
         </a>
       </div>

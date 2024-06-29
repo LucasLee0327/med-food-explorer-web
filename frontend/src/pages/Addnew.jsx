@@ -87,7 +87,12 @@ function Addnew() {
                       >
                           <option value="飯">飯</option>
                           <option value="麵">麵</option>
-                          <option value="麵包">麵包</option>
+                          <option value="速食">速食</option>
+                          <option value="素食">素食</option>
+                          <option value="火鍋">火鍋</option>
+                          <option value="拉麵">拉麵</option>
+                          <option value="簡餐">簡餐</option>
+                          <option value="合菜">合菜</option>
                           <option value="其他">其他</option>
                       </select>
                   </label>

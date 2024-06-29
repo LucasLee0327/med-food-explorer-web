@@ -104,7 +104,7 @@ function Draw() {
                     <fieldset className="border p-4 rounded-lg">
                         <legend className="text-lg font-bold mb-2">料理類別:</legend>
                         <div className="grid grid-cols-3 gap-2">
-                            {['飯', '麵', '麵包', '其他'].map(type => (
+                            {['飯', '麵', '速食', '素食', '火鍋', '拉麵', '簡餐', '合菜', '其他'].map(type => (
                             <label key={type} className="block mb-2">
                                 <input
                                 type="checkbox"
@@ -204,10 +204,10 @@ function Draw() {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                     <div className="bg-white p-4 rounded shadow-lg w-3/4 h-3/4 relative flex">
                         <button
-                            className="absolute top-2 right-2 text-black font-bold"
+                            className="absolute bottom-2 left-2 bg-gray-600 text-white font-bold px-4 py-2 rounded"
                             onClick={closePopup}
                         >
-                            &times;
+                            確定
                         </button>
                         <div className="w-1/2 p-4">
                             <h2 className="text-xl font-bold mb-4">{selectedRestaurant.name}</h2>
