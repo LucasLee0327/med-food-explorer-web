@@ -71,6 +71,12 @@ function Finder() {
     setIsFilterOpen(!isFilterOpen);
   };
 
+  const handleFoodClick = (food) => {
+    if (mapRef.current) {
+      mapRef.current.panTo({ lat: food.latitude, lng: food.longitude });
+    }
+  };
+
   if (!isLoaded) {
     return <div>餐廳列表加載所需時間視Render平台心情，請耐心等候...</div>;
   }
@@ -81,7 +87,7 @@ function Finder() {
             <div className="relative w-1/4 h-full overflow-y-scroll p-4 border-r border-gray-300">
                 {foods.length > 0 ? (
                 foods.map(food => (
-                    <div key={food.id} className="mb-4 p-4 bg-white shadow rounded">
+                    <div key={food.id} className="mb-4 p-4 bg-white shadow rounded cursor-pointer" onClick={() => handleFoodClick(food)}>
                     <h2 className="text-xl font-bold">{food.name}</h2>
                     <p>料理形式: {food.style}</p>
                     <p>料理類別: {food.type}</p>
@@ -91,7 +97,7 @@ function Finder() {
                     </div>
                 ))
                 ) : (
-                <p>No food items available.</p>
+                <p>無餐廳，或是尚在等候資料庫回應。若太久仍未顯示可嘗試重新整理。</p>
                 )}
             </div>
             <div className="w-3/4 h-full">
@@ -99,6 +105,7 @@ function Finder() {
                     mapContainerStyle={containerStyle}
                     center={{ lat: 25.0409803, lng: 121.521604 }}
                     zoom={16}
+                    onLoad={map => (mapRef.current = map)}
                 >
                 {foods.map(food => (
                     food.latitude && food.longitude && (
