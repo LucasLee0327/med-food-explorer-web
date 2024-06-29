@@ -202,33 +202,37 @@ function Draw() {
 
             {selectedRestaurant && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-4 rounded shadow-lg w-3/4 h-3/4 relative">
+                    <div className="bg-white p-4 rounded shadow-lg w-3/4 h-3/4 relative flex">
                         <button
-                        className="absolute top-2 right-2 text-black font-bold"
-                        onClick={closePopup}
+                            className="absolute top-2 right-2 text-black font-bold"
+                            onClick={closePopup}
                         >
-                        &times;
+                            &times;
                         </button>
-                        <h2 className="text-xl font-bold mb-4">{selectedRestaurant.name}</h2>
-                        <p>料理形式: {selectedRestaurant.style}</p>
-                        <p>料理類別: {selectedRestaurant.type}</p>
-                        <p>價格: {selectedRestaurant.price}</p>
-                        <p>抵達所需時間: {selectedRestaurant.arr_time}</p>
-                        <p>地址: {selectedRestaurant.address}</p>
-                        {isLoaded && (
-                        <GoogleMap
-                            mapContainerStyle={containerStyle}
-                            center={{ lat: selectedRestaurant.latitude, lng: selectedRestaurant.longitude }}
-                            zoom={16}
-                        >
-                            <Marker
-                            position={{
-                                lat: selectedRestaurant.latitude,
-                                lng: selectedRestaurant.longitude,
-                            }}
-                            />
-                        </GoogleMap>
-                        )}
+                        <div className="w-1/2 p-4">
+                            <h2 className="text-xl font-bold mb-4">{selectedRestaurant.name}</h2>
+                            <p>料理形式: {selectedRestaurant.style}</p>
+                            <p>料理類別: {selectedRestaurant.type}</p>
+                            <p>價格: {selectedRestaurant.price}</p>
+                            <p>抵達所需時間: {selectedRestaurant.arr_time}</p>
+                            <p>地址: {selectedRestaurant.address}</p>
+                        </div>
+                        <div className="w-1/2 h-full">
+                            {isLoaded && (
+                            <GoogleMap
+                                mapContainerStyle={{ width: '100%', height: '100%' }}
+                                center={{ lat: selectedRestaurant.latitude, lng: selectedRestaurant.longitude }}
+                                zoom={16}
+                            >
+                                <Marker
+                                position={{
+                                    lat: selectedRestaurant.latitude,
+                                    lng: selectedRestaurant.longitude,
+                                }}
+                                />
+                            </GoogleMap>
+                            )}
+                        </div>
                     </div>
                 </div>
             )}
