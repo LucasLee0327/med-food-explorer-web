@@ -46,7 +46,7 @@ function AdminDelete() {
                             <p>料理形式: {restaurant.style}</p>
                             <p>料理類別: {restaurant.type}</p>
                             <p>價格: {restaurant.price}</p>
-                            <p>抵達所需時間: {restaurant.arr_time}</p>
+                            <p>抵達所需時間: {restaurant.travelTime}</p>
                             <p>地址: {restaurant.address}</p>
                             <button
                                 onClick={() => handleDeleteClick(restaurant)}

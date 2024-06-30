@@ -1,6 +1,8 @@
 import { prisma } from "../../../../adapters.js";
 import axios from 'axios';
 
+const origin = { lat: 25.0409803, lng: 121.521604 };
+
 /**
  * @param {import('express').Request} req
  * @param {import('express').Response} res
@@ -35,16 +37,68 @@ async function getGeocode(address) {
   }
 }
 
+async function calculateTravelTime(destination) {
+  const apiKey = process.env.GOOGLEMAP_API_KEY;
+  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin.lat},${origin.lng}&destinations=${destination.lat},${destination.lng}&mode=walking&key=${apiKey}`;
+
+  try {
+    const response = await axios.get(url);
+    const data = await response.data();
+
+    if (data.rows[0].elements[0].status === 'OK') {
+      const durationText = data.rows[0].elements[0].duration.text;
+      return parseDuration(durationText);
+    } else {
+      console.error('Error calculating distance:', data.rows[0].elements[0].status);
+      return null;
+    }
+  } catch (error) {
+    console.error('Error fetching distance data:', error);
+    return null;
+  }
+};
+
+function parseDuration(durationText) {
+  let totalMinutes = 0;
+
+  const regex = /(\d+)\s*(hour|minute|mins|hr|h|m)/g;
+  let match;
+
+  while ((match = regex.exec(durationText)) !== null) {
+    const value = parseInt(match[1], 10);
+    const unit = match[2].toLowerCase();
+
+    if (unit.startsWith('hour') || unit.startsWith('hr') || unit.startsWith('h')) {
+      totalMinutes += value * 60;
+    } else if (unit.startsWith('minute') || unit.startsWith('min') || unit.startsWith('m')) {
+      totalMinutes += value;
+    }
+  }
+
+  return totalMinutes;
+}
+
 export async function getAllRestaurant(req, res) {
     // 確保將 query 參數轉換為數組，處理單個值時轉換為數組
     const processQueryParam = param => (Array.isArray(param) ? param : param ? [param] : []);
 
-    const { style = [], type = [], price = [], arr_time = [] } = req.query;
+    const { style = [], type = [], price = [], travelTime = [] } = req.query;
 
     const styleArray = processQueryParam(style);
     const typeArray = processQueryParam(type);
     const priceArray = processQueryParam(price);
-    const arrTimeArray = processQueryParam(arr_time);
+    const travelTimeArray = processQueryParam(travelTime).map(timeRange => {
+        let min = 0;
+        let max = Infinity;
+        if (timeRange.startsWith('<')) {
+            max = parseInt(timeRange.slice(1), 10);
+        } else if (timeRange.startsWith('>')) {
+            min = parseInt(timeRange.slice(1), 10);
+        } else {
+            [min, max] = timeRange.split('-').map(Number);
+        }
+        return { min, max: max || Infinity };
+    });
 
     try {
         const foods = await prisma.food.findMany({
@@ -52,7 +106,9 @@ export async function getAllRestaurant(req, res) {
                 style: styleArray.length > 0 ? { in: styleArray } : undefined,
                 type: typeArray.length > 0 ? { in: typeArray } : undefined,
                 price: priceArray.length > 0 ? { in: priceArray } : undefined,
-                arr_time: arrTimeArray.length > 0 ? { in: arrTimeArray } : undefined,
+                OR: travelTimeArray.length > 0 ? travelTimeArray.map(range => ({
+                    travelTime: { gte: range.min, lte: range.max }
+                })) : undefined,
             },
         });
 
@@ -65,9 +121,10 @@ export async function getAllRestaurant(req, res) {
 
 export async function createRestaurant(req, res) {
   const { newRestaurant } = req.body;
-  const { name, style, type, price, arr_time, address } = newRestaurant;
+  const { name, style, type, price, address } = newRestaurant;
   try {
       const { latitude, longitude } = await getGeocode(address);
+      const travelTime = await calculateTravelTime({ lat: latitude, lng: longitude });
       
       const restaurant = await prisma.food.upsert({
           where: {
@@ -77,7 +134,7 @@ export async function createRestaurant(req, res) {
             style: style,
             type: type,
             price: price,
-            arr_time: arr_time,
+            travelTime: travelTime,
             address: address,
             latitude: latitude,
             longitude: longitude,
@@ -87,7 +144,7 @@ export async function createRestaurant(req, res) {
             style: style,
             type: type,
             price: price,
-            arr_time: arr_time,
+            travelTime: travelTime,
             address: address,
             latitude: latitude,
             longitude: longitude,
@@ -126,20 +183,37 @@ export async function deleteRestaurant(req, res) {
 }
 
 export async function drawRestaurants(req, res) {
-    const { style = [], type = [], price = [], arr_time = [], numRestaurants = 1 } = req.query;
+    const { style = [], type = [], price = [], travelTime = [], numRestaurants = 1 } = req.query;
 
     const parseFilter = (filter) => Array.isArray(filter) ? filter : [filter];
 
-    const filter = {};
-    if (style.length) filter.style = { in: parseFilter(style) };
-    if (type.length) filter.type = { in: parseFilter(type) };
-    if (price.length) filter.price = { in: parseFilter(price) };
-    if (arr_time.length) filter.arr_time = { in: parseFilter(arr_time) };
+    const styleArray = parseFilter(style);
+    const typeArray = parseFilter(type);
+    const priceArray = parseFilter(price);
+    const travelTimeArray = parseFilter(travelTime).map(timeRange => {
+        let min = 0;
+        let max = Infinity;
+        if (timeRange.startsWith('<')) {
+            max = parseInt(timeRange.slice(1), 10);
+        } else if (timeRange.startsWith('>')) {
+            min = parseInt(timeRange.slice(1), 10);
+        } else {
+            [min, max] = timeRange.split('-').map(Number);
+        }
+        return { min, max: max || Infinity };
+    });
 
     try {
         // Find all restaurants that match the filter criteria
         const matchedRestaurants = await prisma.food.findMany({
-            where: filter,
+            where: {
+              style: styleArray.length > 0 ? { in: styleArray } : undefined,
+              type: typeArray.length > 0 ? { in: typeArray } : undefined,
+              price: priceArray.length > 0 ? { in: priceArray } : undefined,
+              OR: travelTimeArray.length > 0 ? travelTimeArray.map(range => ({
+                  travelTime: { gte: range.min, lte: range.max }
+              })) : undefined,
+            },
         });
 
         if (matchedRestaurants.length <= numRestaurants) {
@@ -170,7 +244,7 @@ export async function getCandidates(req, res) {
 
 export async function createCandidate(req, res) {
   const { newCandidate } = req.body;
-  const { name, style, type, price, arr_time, address } = newCandidate;
+  const { name, style, type, price, address } = newCandidate;
 
   try {
     const candidate = await prisma.candidate.create({
@@ -179,7 +253,6 @@ export async function createCandidate(req, res) {
         style,
         type,
         price,
-        arr_time,
         address,
       }
     });

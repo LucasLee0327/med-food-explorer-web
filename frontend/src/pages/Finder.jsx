@@ -13,7 +13,7 @@ function Finder() {
     style: [],
     type: [],
     price: [],
-    arr_time: []
+    travelTime: []
   });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const mapRef = useRef(null);
@@ -93,7 +93,7 @@ function Finder() {
                     <p>料理形式: {food.style}</p>
                     <p>料理類別: {food.type}</p>
                     <p>價格: {food.price}</p>
-                    <p>抵達所需時間: {food.arr_time}</p>
+                    <p>抵達所需時間: {food.travelTime} 分鐘</p>
                     <p>地址: {food.address}</p>
                     </div>
                 ))
@@ -195,16 +195,16 @@ function Finder() {
               <fieldset>
                   <legend className="font-bold">抵達所需時間:</legend>
                   <div className="grid grid-cols-3 gap-2">
-                    {['馬上', '5分', '10分', '20分', '30分以上'].map((arr_time) => (
-                    <label key={arr_time} className="block">
+                    {['<5', '5-10', '10-20', '20-30', '>30'].map((travelTime) => (
+                    <label key={travelTime} className="block">
                         <input
                         type="checkbox"
-                        name="arr_time"
-                        value={arr_time}
-                        onChange={(e) => handleCheckboxChange(e, 'arr_time')}
-                        checked={filters.arr_time.includes(arr_time)}
+                        name="travelTime"
+                        value={travelTime}
+                        onChange={(e) => handleCheckboxChange(e, 'travelTime')}
+                        checked={filters.travelTime.includes(travelTime)}
                         />
-                        {arr_time}
+                        {travelTime}
                     </label>
                     ))}
                   </div>

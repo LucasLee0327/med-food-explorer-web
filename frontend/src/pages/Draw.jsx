@@ -14,7 +14,7 @@ function Draw() {
         style: [],
         type: [],
         price: [],
-        arr_time: []
+        travelTime: []
     });
     const [numRestaurants, setNumRestaurants] = useState(1);
     const [drawnRestaurants, setDrawnRestaurants] = useState([]);
@@ -144,17 +144,17 @@ function Draw() {
                     <fieldset className="border p-4 rounded-lg">
                         <legend className="text-lg font-bold mb-2">抵達所需時間:</legend>
                         <div className="grid grid-cols-3 gap-2">
-                            {['馬上', '5分', '10分', '20分', '30分以上'].map(time => (
-                            <label key={time} className="block mb-2">
+                            {['<5', '5-10', '10-20', '20-30', '>30'].map(travelTime => (
+                            <label key={travelTime} className="block mb-2">
                                 <input
                                 type="checkbox"
-                                name="arr_time"
-                                value={time}
-                                onChange={e => handleCheckboxChange(e, "arr_time")}
-                                checked={filters.arr_time.includes(time)}
+                                name="travelTime"
+                                value={travelTime}
+                                onChange={e => handleCheckboxChange(e, "travelTime")}
+                                checked={filters.travelTime.includes(time)}
                                 className="mr-2"
                                 />
-                                {time}
+                                {travelTime}
                             </label>
                             ))}
                         </div>
@@ -189,7 +189,7 @@ function Draw() {
                             <p>料理形式: {restaurant.style}</p>
                             <p>料理類別: {restaurant.type}</p>
                             <p>價格: {restaurant.price}</p>
-                            <p>抵達所需時間: {restaurant.arr_time}</p>
+                            <p>抵達所需時間: {restaurant.travelTime} 分鐘</p>
                             <p>地址: {restaurant.address}</p>
                         </div>
                         ))
@@ -214,7 +214,7 @@ function Draw() {
                             <p>料理形式: {selectedRestaurant.style}</p>
                             <p>料理類別: {selectedRestaurant.type}</p>
                             <p>價格: {selectedRestaurant.price}</p>
-                            <p>抵達所需時間: {selectedRestaurant.arr_time}</p>
+                            <p>抵達所需時間: {selectedRestaurant.travelTime} 分鐘</p>
                             <p>地址: {selectedRestaurant.address}</p>
                         </div>
                         <div className="w-1/2 h-full">

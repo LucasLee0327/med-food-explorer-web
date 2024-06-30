@@ -19,7 +19,7 @@ model food {
   style String
   type  String
   price String
-  arr_time  String
+  travelTime  Int
   address String  @default("尚未上傳地址QwQ")
   latitude  Float?
   longitude Float?
@@ -31,7 +31,6 @@ model candidate {
   style String
   type  String
   price String
-  arr_time  String
   address String  @default("尚未上傳地址QwQ")
   createdAt DateTime @default(now())
 } 

@@ -8,7 +8,6 @@ function AdminAdd() {
         style: '中式',
         type: '飯',
         price: '便宜',
-        arr_time: '馬上',
         address: ''
     });
     const [candidates, setCandidates] = useState([]);
@@ -32,7 +31,6 @@ function AdminAdd() {
             style: candidate.style,
             type: candidate.type,
             price: candidate.price,
-            arr_time: candidate.arr_time,
             address: candidate.address
         });
         setSelectedCandidateId(candidate.id);
@@ -146,23 +144,6 @@ function AdminAdd() {
                     </div>
                     <div className="mb-4">
                         <label className="block mb-2">
-                            抵達所需時間:
-                            <select
-                                name="arr_time"
-                                value={newRestaurant.arr_time}
-                                onChange={handleChange}
-                                className="w-full p-2 border rounded"
-                            >
-                                <option value="馬上">馬上</option>
-                                <option value="5分">5分</option>
-                                <option value="10分">10分</option>
-                                <option value="20分">20分</option>
-                                <option value="30以上">30以上</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div className="mb-4">
-                        <label className="block mb-2">
                             地址:
                             <input
                                 type="text"
@@ -187,7 +168,6 @@ function AdminAdd() {
                             <p>料理形式: {candidate.style}</p>
                             <p>料理類別: {candidate.type}</p>
                             <p>價格: {candidate.price}</p>
-                            <p>抵達所需時間: {candidate.arr_time}</p>
                             <p>地址: {candidate.address}</p>
                             <div className="flex gap-2 mt-2">
                                 <button

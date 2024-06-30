@@ -9,7 +9,6 @@ function Addnew() {
       style: "中式",
       type: "飯",
       price: "便宜",
-      arr_time: "馬上",
       address: ""
   });
   const navigate = useNavigate();
@@ -32,7 +31,6 @@ function Addnew() {
             style: "中式",
             type: "飯",
             price: "便宜",
-            arr_time: "馬上",
             address: ""
         });
       } catch (error) {
@@ -114,23 +112,6 @@ function Addnew() {
               </div>
               <div>
                   <label className="block text-lg font-medium text-gray-700 mb-1">
-                      抵達所需時間:
-                      <select 
-                          name="arr_time" 
-                          value={newCandidate.arr_time} 
-                          onChange={handleChange} 
-                          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                      >
-                          <option value="馬上">馬上</option>
-                          <option value="5分">5分</option>
-                          <option value="10分">10分</option>
-                          <option value="20分">20分</option>
-                          <option value="30以上">30以上</option>
-                      </select>
-                  </label>
-              </div>
-              <div>
-                  <label className="block text-lg font-medium text-gray-700 mb-1">
                       地址:
                       <input 
                           type="text" 
@@ -147,7 +128,7 @@ function Addnew() {
                       type="submit" 
                       className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   >
-                      新增餐廳
+                      投稿餐廳
                   </button>
               </div>
           </form>
