@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useJsApiLoader, GoogleMap, Marker, AdvancedMarker } from '@react-google-maps/api';
+import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
 import services from '../services';
 
 const containerStyle = {
@@ -119,28 +119,26 @@ function Finder() {
                 >
                 {foods.map(food => (
                     food.latitude && food.longitude && (
-                      <AdvancedMarker
+                      <Marker
                         key={food.id}
                         position={{
                           lat: food.latitude,
                           lng: food.longitude
                         }}
-                        options={{
-                          icon: {
-                            path: google.maps.SymbolPath.CIRCLE,
-                            fillColor: styleColors[food.style] || 'gray',
-                            fillOpacity: 1,
-                            strokeWeight: 0,
-                            scale: 10
-                          },
-                          label: {
-                            text: food.type,
-                            color: 'white',
-                            fontSize: '12px',
-                            fontWeight: 'bold'
-                          }
+                        icon={{
+                          path: google.maps.SymbolPath.CIRCLE,
+                          fillColor: styleColors[food.style] || 'gray',
+                          fillOpacity: 1,
+                          strokeWeight: 0,
+                          scale: 10
                         }}
-                    />
+                        label={{
+                          text: food.type,
+                          color: 'white',
+                          fontSize: '12px',
+                          fontWeight: 'bold'
+                        }}
+                      />
                     )
                 ))}
                 </GoogleMap>
