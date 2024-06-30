@@ -43,7 +43,7 @@ async function calculateTravelTime(destination) {
 
   try {
     const response = await axios.get(url);
-    const data = response.data();
+    const data = response.data;
 
     if (data.rows[0].elements[0].status === 'OK') {
       const durationText = data.rows[0].elements[0].duration.text;
