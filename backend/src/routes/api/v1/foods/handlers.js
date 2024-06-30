@@ -87,7 +87,7 @@ export async function getAllRestaurant(req, res) {
     const styleArray = processQueryParam(style);
     const typeArray = processQueryParam(type);
     const priceArray = processQueryParam(price);
-    const travelTimeArray = parseFilter(travelTime)
+    const travelTimeArray = processQueryParam(travelTime)
     .filter(timeRange => timeRange.trim() !== "") // 过滤掉空字符串
     .map(timeRange => {
       let min = 0;
@@ -200,18 +200,21 @@ export async function drawRestaurants(req, res) {
     const styleArray = parseFilter(style);
     const typeArray = parseFilter(type);
     const priceArray = parseFilter(price);
-    const travelTimeArray = parseFilter(travelTime).map(timeRange => {
+    const travelTimeArray = parseFilter(travelTime)
+    .filter(timeRange => timeRange.trim() !== "") // 过滤掉空字符串
+    .map(timeRange => {
         let min = 0;
-        let max = Infinity;
+        let max = 9999999; // 设定一个非常大的数作为上限
         if (timeRange.startsWith('<')) {
-            max = parseInt(timeRange.slice(1), 10);
+          max = parseInt(timeRange.slice(1), 10);
         } else if (timeRange.startsWith('>')) {
-            min = parseInt(timeRange.slice(1), 10);
+          min = parseInt(timeRange.slice(1), 10);
         } else {
-            [min, max] = timeRange.split('-').map(Number);
+          [min, max] = timeRange.split('-').map(Number);
         }
-        return { min, max: max || Infinity };
-    });
+        return { min, max };
+    })
+    .filter(range => !isNaN(range.min) && !isNaN(range.max)); // 过滤掉无效的范围
 
     try {
         // Find all restaurants that match the filter criteria
@@ -221,7 +224,10 @@ export async function drawRestaurants(req, res) {
               type: typeArray.length > 0 ? { in: typeArray } : undefined,
               price: priceArray.length > 0 ? { in: priceArray } : undefined,
               OR: travelTimeArray.length > 0 ? travelTimeArray.map(range => ({
-                  travelTime: { gte: range.min, lte: range.max }
+                travelTime: {
+                  gte: range.min,
+                  lte: range.max
+                }
               })) : undefined,
             },
         });
