@@ -1,7 +1,7 @@
 import { prisma } from "../../../../adapters.js";
 import axios from 'axios';
 
-const origin = { lat: 25.0409803, lng: 121.521604 };
+const origin = { latitude: 25.0409803, longitude: 121.521604 };
 
 /**
  * @param {import('express').Request} req
@@ -39,11 +39,11 @@ async function getGeocode(address) {
 
 async function calculateTravelTime(destination) {
   const apiKey = process.env.GOOGLEMAP_API_KEY;
-  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin.lat},${origin.lng}&destinations=${destination.lat},${destination.lng}&mode=walking&key=${apiKey}`;
+  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin.latitude},${origin.longitude}&destinations=${destination.latitude},${destination.longitude}&mode=walking&key=${apiKey}`;
 
   try {
     const response = await axios.get(url);
-    const data = await response.data();
+    const data = response.data();
 
     if (data.rows[0].elements[0].status === 'OK') {
       const durationText = data.rows[0].elements[0].duration.text;
@@ -124,7 +124,11 @@ export async function createRestaurant(req, res) {
   const { name, style, type, price, address } = newRestaurant;
   try {
       const { latitude, longitude } = await getGeocode(address);
-      const travelTime = await calculateTravelTime({ lat: latitude, lng: longitude });
+      const travelTime = await calculateTravelTime({ latitude: latitude, longitude: longitude });
+
+      if (travelTime === null) {
+        return res.status(500).json({ error: 'Error calculating travel time' });
+      }
       
       const restaurant = await prisma.food.upsert({
           where: {
