@@ -151,7 +151,7 @@ function Draw() {
                                 name="travelTime"
                                 value={travelTime}
                                 onChange={e => handleCheckboxChange(e, "travelTime")}
-                                checked={filters.travelTime.includes(time)}
+                                checked={filters.travelTime.includes(travelTime)}
                                 className="mr-2"
                                 />
                                 {travelTime}
