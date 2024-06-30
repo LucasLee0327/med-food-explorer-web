@@ -154,7 +154,7 @@ function Draw() {
                                 checked={filters.travelTime.includes(travelTime)}
                                 className="mr-2"
                                 />
-                                {travelTime}
+                                {travelTime}分鐘
                             </label>
                             ))}
                         </div>

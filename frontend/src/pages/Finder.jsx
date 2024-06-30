@@ -1,10 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
+import { useJsApiLoader, GoogleMap, Marker, AdvancedMarker } from '@react-google-maps/api';
 import services from '../services';
 
 const containerStyle = {
   width: '100%',
-  height: '600px'
+  height: '100%'
+};
+
+const styleColors = {
+  '中式': 'red',
+  '西式': 'blue',
+  '日式': 'yellow',
+  '韓式': 'pink',
+  '台式': 'green',
+  '其他': 'purple'
 };
 
 function Finder() {
@@ -110,13 +119,27 @@ function Finder() {
                 >
                 {foods.map(food => (
                     food.latitude && food.longitude && (
-                    <Marker
+                      <AdvancedMarker
                         key={food.id}
                         position={{
-                        lat: food.latitude,
-                        lng: food.longitude
+                          lat: food.latitude,
+                          lng: food.longitude
                         }}
-                        label={food.name}
+                        options={{
+                          icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            fillColor: styleColors[food.style] || 'gray',
+                            fillOpacity: 1,
+                            strokeWeight: 0,
+                            scale: 10
+                          },
+                          label: {
+                            text: food.type,
+                            color: 'white',
+                            fontSize: '12px',
+                            fontWeight: 'bold'
+                          }
+                        }}
                     />
                     )
                 ))}
@@ -204,7 +227,7 @@ function Finder() {
                         onChange={(e) => handleCheckboxChange(e, 'travelTime')}
                         checked={filters.travelTime.includes(travelTime)}
                         />
-                        {travelTime}
+                        {travelTime}分鐘
                     </label>
                     ))}
                   </div>
