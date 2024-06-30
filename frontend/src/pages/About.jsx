@@ -4,7 +4,7 @@ function About() {
   return(
     <>
       <div className="flex justify-center items-center py-24">
-        <div className="container mx-auto flex justify-center items-center px-10 md:flex-row flex-col">
+        <div className="w-full max-w-screen-xl flex justify-center items-center px-10 md:flex-row flex-col">
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
             <img className="object-cover object-center rounded" alt="my selfie" src={mypic} />
           </div>
