@@ -193,14 +193,13 @@ export async function deleteRestaurant(req, res) {
 }
 
 export async function drawRestaurants(req, res) {
+    const processQueryParam = param => (Array.isArray(param) ? param : param ? [param] : []);
     const { style = [], type = [], price = [], travelTime = [], numRestaurants = 1 } = req.query;
 
-    const parseFilter = (filter) => Array.isArray(filter) ? filter : [filter];
-
-    const styleArray = parseFilter(style);
-    const typeArray = parseFilter(type);
-    const priceArray = parseFilter(price);
-    const travelTimeArray = parseFilter(travelTime)
+    const styleArray = processQueryParam(style);
+    const typeArray = processQueryParam(type);
+    const priceArray = processQueryParam(price);
+    const travelTimeArray = processQueryParam(travelTime)
     .filter(timeRange => timeRange.trim() !== "") // 过滤掉空字符串
     .map(timeRange => {
         let min = 0;
