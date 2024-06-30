@@ -87,18 +87,21 @@ export async function getAllRestaurant(req, res) {
     const styleArray = processQueryParam(style);
     const typeArray = processQueryParam(type);
     const priceArray = processQueryParam(price);
-    const travelTimeArray = processQueryParam(travelTime).map(timeRange => {
-        let min = 0;
-        let max = Infinity;
-        if (timeRange.startsWith('<')) {
-            max = parseInt(timeRange.slice(1), 10);
-        } else if (timeRange.startsWith('>')) {
-            min = parseInt(timeRange.slice(1), 10);
-        } else {
-            [min, max] = timeRange.split('-').map(Number);
-        }
-        return { min, max: max || Infinity };
-    });
+    const travelTimeArray = parseFilter(travelTime)
+    .filter(timeRange => timeRange.trim() !== "") // 过滤掉空字符串
+    .map(timeRange => {
+      let min = 0;
+      let max = 9999999;
+      if (timeRange.startsWith('<')) {
+        max = parseInt(timeRange.slice(1), 10);
+      } else if (timeRange.startsWith('>')) {
+        min = parseInt(timeRange.slice(1), 10);
+      } else {
+        [min, max] = timeRange.split('-').map(Number);
+      }
+      return { min, max };
+    })
+    .filter(range => !isNaN(range.min) && !isNaN(range.max)); // 过滤掉无效的范围
 
     try {
         const foods = await prisma.food.findMany({
@@ -107,7 +110,10 @@ export async function getAllRestaurant(req, res) {
                 type: typeArray.length > 0 ? { in: typeArray } : undefined,
                 price: priceArray.length > 0 ? { in: priceArray } : undefined,
                 OR: travelTimeArray.length > 0 ? travelTimeArray.map(range => ({
-                    travelTime: { gte: range.min, lte: range.max }
+                  travelTime: {
+                    gte: range.min,
+                    lte: range.max
+                  }
                 })) : undefined,
             },
         });
