@@ -8,12 +8,12 @@ const containerStyle = {
 };
 
 const styleColors = {
-  '中式': 'ff0000',
-  '西式': '0000ff',
-  '日式': 'ffff00',
-  '韓式': 'ff00ff',
-  '台式': '00ff00',
-  '其他': '8700ff'
+  '中式': '#ff0000',
+  '西式': '#0000ff',
+  '日式': '#ffff00',
+  '韓式': '#ff00ff',
+  '台式': '#00ff00',
+  '其他': '#8700ff'
 };
 
 function Finder() {
@@ -134,7 +134,7 @@ function Finder() {
                         }}
                         label={{
                           text: food.type,
-                          color: (styleColors[food.style] === 'ffff00' || styleColors[food.style] === 'ff00ff') ? 'black' : 'white',
+                          color: (styleColors[food.style] === '#ffff00' || styleColors[food.style] === '#ff00ff') ? 'black' : 'white',
                           fontSize: '12px',
                           fontWeight: 'bold'
                         }}
