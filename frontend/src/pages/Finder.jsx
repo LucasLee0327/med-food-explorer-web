@@ -8,12 +8,12 @@ const containerStyle = {
 };
 
 const styleColors = {
-  '中式': 'red',
-  '西式': 'blue',
-  '日式': 'yellow',
-  '韓式': 'pink',
-  '台式': 'green',
-  '其他': 'purple'
+  '中式': 'ff0000',
+  '西式': '0000ff',
+  '日式': 'ffff00',
+  '韓式': 'ff00ff',
+  '台式': '00ff00',
+  '其他': '8700ff'
 };
 
 function Finder() {
