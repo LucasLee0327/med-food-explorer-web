@@ -103,9 +103,13 @@ export default function RootLayout() {
           </>
         )}
       </Disclosure>
-      <div>
+      <div className="flex-grow">
         <Outlet />
       </div>   
+
+      <footer className="bg-red-600 text-center py-4 text-white">
+        &copy; 2024 Lee Cheng-Yang. All rights reserved.
+      </footer>
     </div>
   );
 }
