@@ -126,6 +126,7 @@ function Finder() {
                           lng: food.longitude
                         }}
                         icon={{
+                          path: google.maps.SymbolPath.CIRCLE,
                           fillColor: styleColors[food.style] || 'gray',
                           fillOpacity: 1,
                           strokeWeight: 0,
@@ -133,8 +134,8 @@ function Finder() {
                         }}
                         label={{
                           text: food.type,
-                          color: (styleColors[food.style] === 'yellow' || styleColors[food.style] === 'pink') ? 'black' : 'white',
-                          fontSize: '16px',
+                          color: (styleColors[food.style] === 'ffff00' || styleColors[food.style] === 'ff00ff') ? 'black' : 'white',
+                          fontSize: '12px',
                           fontWeight: 'bold'
                         }}
                       />
@@ -144,7 +145,7 @@ function Finder() {
             </div>
         </div>
         <div
-            className={`fixed top-0 right-0 w-1/4 h-full bg-white p-4 shadow-lg transition-transform transform ${
+            className={`fixed top-0 right-0 w-1/4 h-full overflow-y-scroll bg-white p-4 shadow-lg transition-transform transform ${
             isFilterOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
             style={{ zIndex: 1000 }}
