@@ -126,16 +126,15 @@ function Finder() {
                           lng: food.longitude
                         }}
                         icon={{
-                          path: google.maps.SymbolPath.CIRCLE,
                           fillColor: styleColors[food.style] || 'gray',
                           fillOpacity: 1,
                           strokeWeight: 0,
-                          scale: 10
+                          scale: 15
                         }}
                         label={{
                           text: food.type,
-                          color: 'white',
-                          fontSize: '12px',
+                          color: (styleColors[food.style] === 'yellow' || styleColors[food.style] === 'pink') ? 'black' : 'white',
+                          fontSize: '16px',
                           fontWeight: 'bold'
                         }}
                       />
