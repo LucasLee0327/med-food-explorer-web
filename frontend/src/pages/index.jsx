@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import myicon from "./pikachu.png"
-import homeicon from "./what-to-eat.jpg"
+import homeicon from "./what-to-eat.gif"
 
 
 function classNames(...classes) {
@@ -21,7 +21,7 @@ export default function RootLayout() {
     ];
 
   return (
-    <div>    
+    <div className="flex flex-col min-h-screen">    
       <Disclosure as="nav" className="bg-red-600">
         {({ open }) => (
           <>
