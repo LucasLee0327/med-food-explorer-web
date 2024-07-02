@@ -117,48 +117,48 @@ function Finder() {
                     zoom={16}
                     onLoad={map => (mapRef.current = map)}
                 >
-                {foods.map(food => (
-                    food.latitude && food.longitude && (
-                      <Marker
-                        key={food.id}
-                        position={{
-                          lat: food.latitude,
-                          lng: food.longitude
-                        }}
-                        icon={{
-                          path: google.maps.SymbolPath.CIRCLE,
-                          fillColor: styleColors[food.style] || 'gray',
-                          fillOpacity: 1,
-                          strokeWeight: 0,
-                          scale: 15
-                        }}
-                        label={{
-                          text: food.type,
-                          color: (styleColors[food.style] === 'yellow' || styleColors[food.style] === 'pink') ? 'black' : 'white',
-                          fontSize: '12px',
-                          fontWeight: 'bold'
-                        }}
-                      />
-                    )
-                ))}
+                  {foods.map(food => (
+                      food.latitude && food.longitude && (
+                        <Marker
+                          key={food.id}
+                          position={{
+                            lat: food.latitude,
+                            lng: food.longitude
+                          }}
+                          icon={{
+                            path: google.maps.SymbolPath.CIRCLE,
+                            fillColor: styleColors[food.style] || 'gray',
+                            fillOpacity: 1,
+                            strokeWeight: 0,
+                            scale: 15
+                          }}
+                          label={{
+                            text: food.type,
+                            color: (styleColors[food.style] === 'yellow' || styleColors[food.style] === 'pink') ? 'black' : 'white',
+                            fontSize: '12px',
+                            fontWeight: 'bold'
+                          }}
+                        />
+                      )
+                  ))}
+                  <div className="absolute bottom-4 left-4 bg-white p-4 shadow-lg rounded">
+                      <h3 className="font-bold mb-2">餐廳類別顏色說明</h3>
+                      <ul>
+                        {Object.entries(styleColors).map(([style, color]) => (
+                          <li key={style} className="flex items-center mb-1">
+                            <span className={`block w-4 h-4 mr-2`} style={{ backgroundColor: color }}></span>
+                            {style}
+                          </li>
+                        ))}
+                      </ul>
+                  </div>
                 </GoogleMap>
-                <div className="absolute bottom-4 left-4 bg-white p-4 shadow-lg rounded">
-                    <h3 className="font-bold mb-2">餐廳類別顏色說明</h3>
-                    <ul>
-                      {Object.entries(styleColors).map(([style, color]) => (
-                        <li key={style} className="flex items-center mb-1">
-                          <span className={`block w-4 h-4 mr-2`} style={{ backgroundColor: color }}></span>
-                          {style}
-                        </li>
-                      ))}
-                    </ul>
-                </div>
             </div>
         </div>
         <div
             className={`fixed top-0 right-0 w-1/4 h-full bg-white p-4 shadow-lg transition-transform transform ${
             isFilterOpen ? 'translate-x-0' : 'translate-x-full'
-            } overflow-y-auto`}
+            }`}
             style={{ zIndex: 1000 }}
         >
             <button
@@ -168,7 +168,7 @@ function Finder() {
             >
                 {isFilterOpen ? '收回' : '篩選條件'}
             </button>
-            <form onSubmit={handleSubmit}>
+            <form className='overflow-y-auto' onSubmit={handleSubmit}>
               <fieldset>
                   <legend className="font-bold">料理形式:</legend>
                   <div className="grid grid-cols-3 gap-2">
