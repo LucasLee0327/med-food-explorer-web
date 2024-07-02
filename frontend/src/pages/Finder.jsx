@@ -158,13 +158,13 @@ function Finder() {
         <div
             className={`fixed top-0 right-0 w-1/4 h-full bg-white p-4 shadow-lg transition-transform transform ${
             isFilterOpen ? 'translate-x-0' : 'translate-x-full'
-            }`}
+            } overflow-y-auto`}
             style={{ zIndex: 1000 }}
         >
             <button
                 className="absolute left-0 top-1/2 transform -translate-x-full -translate-y-1/2 bg-white text-black font-bold py-2 px-4 border rounded-l-lg"
                 onClick={toggleFilterMenu}
-                style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+                style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', zIndex: 1001 }}
             >
                 {isFilterOpen ? '收回' : '篩選條件'}
             </button>
