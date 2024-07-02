@@ -142,12 +142,23 @@ function Finder() {
                     )
                 ))}
                 </GoogleMap>
+                <div className="absolute bottom-4 left-4 bg-white p-4 shadow-lg rounded">
+                    <h3 className="font-bold mb-2">餐廳類別顏色說明</h3>
+                    <ul>
+                      {Object.entries(styleColors).map(([style, color]) => (
+                        <li key={style} className="flex items-center mb-1">
+                          <span className={`block w-4 h-4 mr-2`} style={{ backgroundColor: color }}></span>
+                          {style}
+                        </li>
+                      ))}
+                    </ul>
+                </div>
             </div>
         </div>
         <div
             className={`fixed top-0 right-0 w-1/4 h-full bg-white p-4 shadow-lg transition-transform transform ${
             isFilterOpen ? 'translate-x-0' : 'translate-x-full'
-            }`}
+            } overflow-y-auto`}
             style={{ zIndex: 1000 }}
         >
             <button

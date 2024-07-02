@@ -118,7 +118,7 @@ export function RootIndex() {
   return (
     <div className="my-16 text-center">
       <div className="flex justify-center my-4">
-        <h1 className="text-4xl block">給迷茫晚餐吃什麼的你</h1>
+        <h1 className="text-4xl block font-bold">給迷茫吃什麼的你</h1>
       </div>
       <div className="flex justify-center">
         <a href="https://www.youtube.com/watch?v=t_KdbASIkB8" target="_blank">
