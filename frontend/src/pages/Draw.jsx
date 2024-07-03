@@ -79,7 +79,7 @@ function Draw() {
         <>
             <div className="flex h-screen flex-col md:flex-row">
                 {/* 左側篩選表單區塊 */}
-                <div className="md:w-1/3 md:h-full md:p-4 md:border-r md:border-gray-300 bg-gray-100 overflow-y-auto h-2/3 p-2">
+                <div className="md:w-1/3 md:h-full md:p-4 md:border-r md:border-gray-300 bg-gray-100 overflow-y-auto h-1/2 p-2">
                     <h1 className="text-2xl font-bold mb-4">篩選條件</h1>
                     <form onSubmit={handleSubmit} className="space-y-4">
                     <fieldset className="border p-4 rounded-lg">
@@ -179,7 +179,7 @@ function Draw() {
                 </div>
 
                 {/* 右側抽獎結果區塊 */}
-                <div className="md:w-2/3 md:h-full p-4 overflow-y-auto h-1/3">
+                <div className="md:w-2/3 md:h-full p-4 overflow-y-auto h-1/2">
                     <h1 className="text-2xl font-bold mb-4">抽獎結果</h1>
                     <div>
                     {drawnRestaurants.length > 0 ? (
