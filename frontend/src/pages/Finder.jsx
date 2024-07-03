@@ -142,7 +142,7 @@ function Finder() {
                       )
                   ))}
                   <div className="absolute bottom-4 left-4 bg-white p-2 md:p-4 shadow-lg rounded">
-                      <h3 className="text-sm md:text-base font-bold mb-2">餐廳類別顏色說明</h3>
+                      <h3 className="text-sm md:text-base font-bold mb-2">料理形式顏色說明</h3>
                       <ul>
                         {Object.entries(styleColors).map(([style, color]) => (
                           <li key={style} className="flex items-center mb-1">
