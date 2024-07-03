@@ -93,8 +93,8 @@ function Finder() {
 
   return (
     <>
-        <div className="flex flex-col md:flex-row h-screen">
-            <div className="relative md:w-1/4 w-full h-full overflow-y-scroll p-4 border-r border-gray-300">
+        <div className="flex h-screen md:flex-row flex-col">
+            <div className="relative md:w-1/4 md:h-full w-full h-1/3 overflow-y-scroll p-4 border-r border-gray-300">
                 {foods.length > 0 ? (
                 foods.map(food => (
                     <div key={food.id} className="mb-4 p-4 bg-white shadow rounded cursor-pointer" onClick={() => handleFoodClick(food)}>
@@ -110,7 +110,7 @@ function Finder() {
                 <p>無餐廳，或是尚在等候資料庫回應。若太久仍未顯示可嘗試重新整理。</p>
                 )}
             </div>
-            <div className="md:w-3/4 w-full h-full">
+            <div className="md:w-3/4 md:h-full w-full h-2/3">
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={{ lat: 25.0409803, lng: 121.521604 }}
@@ -141,13 +141,13 @@ function Finder() {
                         />
                       )
                   ))}
-                  <div className="absolute bottom-4 left-4 bg-white p-4 shadow-lg rounded">
-                      <h3 className="font-bold mb-2">餐廳類別顏色說明</h3>
+                  <div className="absolute bottom-4 left-4 bg-white p-2 md:p-4 shadow-lg rounded">
+                      <h3 className="text-sm md:text-base font-bold mb-2">餐廳類別顏色說明</h3>
                       <ul>
                         {Object.entries(styleColors).map(([style, color]) => (
                           <li key={style} className="flex items-center mb-1">
-                            <span className={`block w-4 h-4 mr-2`} style={{ backgroundColor: color }}></span>
-                            {style}
+                            <span className={`block w-3 h-3 md:w-4 md:h-4 mr-2`} style={{ backgroundColor: color }}></span>
+                            <span className="text-xs md:text-sm">{style}</span>
                           </li>
                         ))}
                       </ul>
