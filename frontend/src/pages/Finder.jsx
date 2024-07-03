@@ -93,8 +93,8 @@ function Finder() {
 
   return (
     <>
-        <div className="flex h-screen">
-            <div className="relative w-1/4 h-full overflow-y-scroll p-4 border-r border-gray-300">
+        <div className="flex flex-col md:flex-row h-screen">
+            <div className="relative md:w-1/4 w-full h-full overflow-y-scroll p-4 border-r border-gray-300">
                 {foods.length > 0 ? (
                 foods.map(food => (
                     <div key={food.id} className="mb-4 p-4 bg-white shadow rounded cursor-pointer" onClick={() => handleFoodClick(food)}>
@@ -110,7 +110,7 @@ function Finder() {
                 <p>無餐廳，或是尚在等候資料庫回應。若太久仍未顯示可嘗試重新整理。</p>
                 )}
             </div>
-            <div className="w-3/4 h-full">
+            <div className="md:w-3/4 w-full h-full">
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={{ lat: 25.0409803, lng: 121.521604 }}
@@ -157,7 +157,7 @@ function Finder() {
             </div>
         </div>
         <div
-            className={`fixed top-0 right-0 w-1/4 h-full bg-white p-4 shadow-lg transition-transform transform ${
+            className={`fixed top-0 right-0 md:w-1/4 w-3/4 h-full bg-white p-4 shadow-lg transition-transform transform ${
             isFilterOpen ? 'translate-x-0' : 'translate-x-full'
             }`}
             style={{ zIndex: 1000 }}
@@ -251,7 +251,6 @@ function Finder() {
           
         </div>        
     </>
-    
   );
 }
 
