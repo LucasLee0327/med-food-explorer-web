@@ -202,14 +202,14 @@ function Draw() {
 
             {selectedRestaurant && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-4 rounded shadow-lg w-3/4 h-3/4 relative flex">
+                    <div className="bg-white p-4 rounded shadow-lg w-11/12 h-3/4 relative flex flex-col md:flex-row">
                         <button
                             className="absolute bottom-2 left-2 bg-gray-600 text-white font-bold px-4 py-2 rounded"
                             onClick={closePopup}
                         >
                             確定
                         </button>
-                        <div className="w-1/2 p-4">
+                        <div className="p-4 overflow-y-auto md:w-1/2">
                             <h2 className="text-xl font-bold mb-4">{selectedRestaurant.name}</h2>
                             <p>料理形式: {selectedRestaurant.style}</p>
                             <p>料理類別: {selectedRestaurant.type}</p>
@@ -217,7 +217,7 @@ function Draw() {
                             <p>抵達所需時間: {selectedRestaurant.travelTime} 分鐘</p>
                             <p>地址: {selectedRestaurant.address}</p>
                         </div>
-                        <div className="w-1/2 h-full">
+                        <div className="h-1/2 md:h-full mt-4 md:mt-0 md:w-1/2">
                             {isLoaded && (
                             <GoogleMap
                                 mapContainerStyle={{ width: '100%', height: '100%' }}
