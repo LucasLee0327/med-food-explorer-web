@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useJsApiLoader, GoogleMap, Marker } from '@react-google-maps/api';
+import { useJsApiLoader, GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
 import services from '../services';
 
 const containerStyle = {
@@ -25,6 +25,7 @@ function Finder() {
     travelTime: []
   });
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const mapRef = useRef(null);
 
   const apiKey = import.meta.env.VITE_GOOGLEMAP_API_KEY;
@@ -85,6 +86,7 @@ function Finder() {
     if (mapRef.current) {
       mapRef.current.panTo({ lat: food.latitude, lng: food.longitude });
     }
+    setSelectedRestaurant(food);
   };
 
   if (!isLoaded) {
@@ -138,9 +140,23 @@ function Finder() {
                             fontSize: '12px',
                             fontWeight: 'bold'
                           }}
+                          onClick={() => handleFoodClick(food)}
                         />
                       )
                   ))}
+                  {selectedRestaurant && (
+                    <InfoWindow
+                      position={{
+                        lat: selectedRestaurant.latitude,
+                        lng: selectedRestaurant.longitude
+                      }}
+                      onCloseClick={() => setSelectedRestaurant(null)}
+                    >
+                      <div>
+                        <h2>{selectedRestaurant.name}</h2>
+                      </div>
+                    </InfoWindow>
+                  )}
                   <div className="absolute bottom-4 left-4 bg-white p-2 md:p-4 shadow-lg rounded">
                       <h3 className="text-sm md:text-base font-bold mb-2">料理形式顏色說明</h3>
                       <ul>
