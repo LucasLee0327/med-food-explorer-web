@@ -35,7 +35,7 @@ function Addnew() {
         });
       } catch (error) {
           console.error('Error updating new restaurant:', error);
-          alert('Error uploading new restaurant. Please try again.');
+          alert(`Error uploading new candidate: ${error}. Please try again.`);
       }
   };
 
