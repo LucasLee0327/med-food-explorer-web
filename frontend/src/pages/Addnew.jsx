@@ -25,7 +25,7 @@ function Addnew() {
       e.preventDefault();
       try {
           await services.user.createCandidate(newCandidate);
-          alert("Upload succeeded! Please wait for verification.");
+          alert("投稿成功!請等待審核。");
           setNewCandidate({
             name: "",
             style: "中式",
@@ -35,7 +35,7 @@ function Addnew() {
         });
       } catch (error) {
           console.error('Error updating new restaurant:', error);
-          alert(`Error uploading new candidate: ${error}. Please try again.`);
+          alert('投稿失敗。若使用手機，請嘗試關閉瀏覽器的防止跨網站追蹤功能，或是改用電腦上傳。');
       }
   };
 

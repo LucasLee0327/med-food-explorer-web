@@ -260,7 +260,6 @@ export async function getCandidates(req, res) {
 export async function createCandidate(req, res) {
   const { newCandidate } = req.body;
   const { name, style, type, price, address } = newCandidate;
-  console.log(newCandidate);
 
   try {
     const candidate = await prisma.candidate.create({
@@ -276,7 +275,6 @@ export async function createCandidate(req, res) {
     res.status(201).json(candidate);
   } catch (error) {
     console.error('Error adding new candidate:', error);
-    console.log(error);
     res.status(500).json({ error: 'An error occurred while adding new candidate.' });
   }
 }
