@@ -83,17 +83,9 @@ function Finder() {
   };
 
   const handleFoodClick = (food) => {
-    if (mapRef.current) {
-      mapRef.current.panTo({ lat: food.latitude, lng: food.longitude });
-    }
     setSelectedRestaurant(food);
-  };
-
-  const handleMarkerClick = (food) => {
     if (mapRef.current) {
       mapRef.current.panTo({ lat: food.latitude, lng: food.longitude });
-      mapRef.current.setZoom(16); // 可以調整這裡的 zoom 值
-      setSelectedRestaurant(food);
     }
   };
 
@@ -148,7 +140,7 @@ function Finder() {
                             fontSize: '12px',
                             fontWeight: 'bold'
                           }}
-                          onClick={() => handleMarkerClick(food)}
+                          onClick={() => handleFoodClick(food)}
                         />
                       )
                   ))}
