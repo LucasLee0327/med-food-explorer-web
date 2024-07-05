@@ -85,8 +85,8 @@ function Finder() {
   const handleFoodClick = (food) => {
     if (mapRef.current) {
       mapRef.current.panTo({ lat: food.latitude, lng: food.longitude });
+      setSelectedRestaurant(food);
     }
-    setSelectedRestaurant(food);
   };
 
   if (!isLoaded) {
@@ -150,10 +150,9 @@ function Finder() {
                         lat: selectedRestaurant.latitude,
                         lng: selectedRestaurant.longitude
                       }}
-                      onCloseClick={() => setSelectedRestaurant(null)}
                     >
                       <div>
-                        <h2>{selectedRestaurant.name}</h2>
+                        <h2 className='font-bold'>{selectedRestaurant.name}</h2>
                       </div>
                     </InfoWindow>
                   )}
