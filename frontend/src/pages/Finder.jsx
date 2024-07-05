@@ -153,6 +153,7 @@ function Finder() {
                         lat: selectedRestaurant.latitude,
                         lng: selectedRestaurant.longitude
                       }}
+                      onCloseClick={() => setSelectedFood(selectedRestaurant)}
                     >
                       <div>
                         <h2 className='font-bold'>{selectedRestaurant.name}</h2>
