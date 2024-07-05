@@ -156,7 +156,7 @@ function Finder() {
                     >
                       <div>
                         <h2 className='font-bold'>{selectedRestaurant.name}</h2>
-                        <p>{selectedFood.address}</p>
+                        <p>{selectedRestaurant.address}</p>
                       </div>
                     </InfoWindow>
                   )}
