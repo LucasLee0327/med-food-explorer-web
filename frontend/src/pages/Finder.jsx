@@ -83,7 +83,7 @@ function Finder() {
   };
 
   const handleFoodClick = (food) => {
-    setSelectedRestaurant(food);
+    // setSelectedRestaurant(food);
     if (mapRef.current) {
       mapRef.current.panTo({ lat: food.latitude, lng: food.longitude });
     }
