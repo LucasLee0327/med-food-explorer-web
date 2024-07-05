@@ -10,7 +10,11 @@ const services = {
 api.interceptors.request.use(
   async (config) => {
     const { csrfToken } = await auth.getCsrf();
-    config.headers["x-csrf-token"] = csrfToken;
+    if (csrfToken) {
+      config.headers["x-csrf-token"] = csrfToken;
+    } else {
+      console.error('CSRF token not found!');
+    }
     return config;
   },
   null,
