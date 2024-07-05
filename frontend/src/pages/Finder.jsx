@@ -46,6 +46,12 @@ function Finder() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (selectedFood && mapRef.current) {
+      mapRef.current.panTo({ lat: selectedFood.latitude, lng: selectedFood.longitude });
+    }
+  }, [selectedFood]);
+
   const handleCheckboxChange = (event, category) => {
     const { value, checked } = event.target;
     if (checked) {
@@ -83,10 +89,7 @@ function Finder() {
   };
 
   const handleFoodClick = (food) => {
-    // setSelectedRestaurant(food);
-    if (mapRef.current) {
-      mapRef.current.panTo({ lat: food.latitude, lng: food.longitude });
-    }
+    setSelectedRestaurant(food);
   };
 
   if (!isLoaded) {
@@ -153,6 +156,7 @@ function Finder() {
                     >
                       <div>
                         <h2 className='font-bold'>{selectedRestaurant.name}</h2>
+                        <p>{selectedFood.address}</p>
                       </div>
                     </InfoWindow>
                   )}
