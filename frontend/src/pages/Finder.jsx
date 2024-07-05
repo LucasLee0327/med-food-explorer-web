@@ -47,10 +47,10 @@ function Finder() {
   }, []);
 
   useEffect(() => {
-    if (selectedFood && mapRef.current) {
-      mapRef.current.panTo({ lat: selectedFood.latitude, lng: selectedFood.longitude });
+    if (selectedRestaurant && mapRef.current) {
+      mapRef.current.panTo({ lat: selectedRestaurant.latitude, lng: selectedRestaurant.longitude });
     }
-  }, [selectedFood]);
+  }, [selectedRestaurant]);
 
   const handleCheckboxChange = (event, category) => {
     const { value, checked } = event.target;
