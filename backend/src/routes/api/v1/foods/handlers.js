@@ -25,7 +25,19 @@ async function getGeocode(address) {
       });
 
       if (response.data.status === "OK" && response.data.results.length > 0) {
-          const { lat, lng } = response.data.results[0].geometry.location;
+          // 優先篩選出 location_type 為 'ROOFTOP' 的結果
+          let preferredResult = null;
+          for (const result of response.data.results) {
+              if (result.geometry.location_type === 'ROOFTOP') {
+                  preferredResult = result;
+                  break;
+              } else if (!preferredResult && result.geometry.location_type === 'RANGE_INTERPOLATED') {
+                  preferredResult = result;
+              }
+          }
+          // 如果沒有找到 ROOFTOP 的結果，使用第一個可用結果
+          const finalResult = preferredResult || response.data.results[0];
+          const { lat, lng } = finalResult.geometry.location;
           return { latitude: lat, longitude: lng };
       } else {
           console.log("Failed to get geocode for address:", address);
