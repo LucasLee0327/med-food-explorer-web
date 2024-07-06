@@ -124,6 +124,7 @@ function AdminAdd() {
                                 <option value="簡餐">簡餐</option>
                                 <option value="合菜">合菜</option>
                                 <option value="早餐">早餐</option>
+                                <option value="綜合">綜合</option>
                                 <option value="其他">其他</option>
                             </select>
                         </label>
@@ -137,9 +138,9 @@ function AdminAdd() {
                                 onChange={handleChange}
                                 className="w-full p-2 border rounded"
                             >
-                                <option value="便宜">便宜(小於150元)</option>
-                                <option value="中等">中等(150~300元)</option>
-                                <option value="貴">貴(大於300元)</option>
+                                <option value="便宜(小於150元)">便宜(小於150元)</option>
+                                <option value="中等(150~300元)">中等(150~300元)</option>
+                                <option value="貴(大於300元)">貴(大於300元)</option>
                             </select>
                         </label>
                     </div>
