@@ -19,6 +19,8 @@ export default function RootLayout() {
       { name: '美食抽獎', href: '/Draw'},
       { name: '投稿餐廳', href: '/Addnew'}
     ];
+  
+  const [isModalOpen, setIsModalOpen] = useState(false); // 新增的部分
 
   return (
     <div className="flex flex-col min-h-screen">    
@@ -69,6 +71,15 @@ export default function RootLayout() {
                           {item.name}
                         </NavLink>
                       ))}
+                      <button 
+                        className="text-gray-300 hover:bg-red-800 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                        onClick={() => setIsModalOpen(true)}
+                      >
+                        <span className="sr-only">使用說明</span>
+                        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h0m0-4h0m0-6h0m6 6h0M6 12h0m12-4h0M6 8h0m6 12h0m6-10h0M6 16h0" />
+                        </svg>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -110,6 +121,29 @@ export default function RootLayout() {
       <footer className="bg-red-600 text-center py-4 text-white">
         &copy; 2024 Lee Cheng-Yang. All rights reserved.
       </footer>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+          <div className="bg-white rounded-lg p-6 relative z-10">
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+              onClick={() => setIsModalOpen(false)}
+            >
+              <span className="sr-only">關閉</span>
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+            <h2 className="text-2xl font-bold mb-4">網站使用說明</h2>
+            <p className="mb-2">首頁：顯示網站的主要功能和介紹。</p>
+            <p className="mb-2">關於本站：介紹網站的背景和目的。</p>
+            <p className="mb-2">尋找美食：根據不同的條件篩選並顯示美食餐廳。</p>
+            <p className="mb-2">美食抽獎：隨機選擇一個美食餐廳。</p>
+            <p className="mb-2">投稿餐廳：用戶可以提交新的餐廳資料。</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
