@@ -77,7 +77,7 @@ export default function RootLayout() {
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <button
-                    className="bg-white rounded-full p-2"
+                    className="bg-red-600 rounded-full p-2"
                     onClick={() => setIsModalOpen(true)}
                   >
                     <img src={infoIcon} alt="Info" className="h-6 w-6"/>
@@ -107,6 +107,12 @@ export default function RootLayout() {
                       {item.name}
                     </NavLink>
                   ))}
+                  <button
+                    className="bg-red-600 rounded-full p-2 ml-3 mt-2"
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    <img src={infoIcon} alt="Info" className="h-6 w-6"/>
+                  </button>
                 </div>
               )}
             </Disclosure.Panel>
@@ -135,11 +141,15 @@ export default function RootLayout() {
               </svg>
             </button>
             <h2 className="text-2xl font-bold mb-4">網站使用說明</h2>
-            <p className="mb-2">首頁：顯示網站的主要功能和介紹。</p>
-            <p className="mb-2">關於本站：介紹網站的背景和目的。</p>
-            <p className="mb-2">尋找美食：根據不同的條件篩選並顯示美食餐廳。</p>
-            <p className="mb-2">美食抽獎：隨機選擇一個美食餐廳。</p>
-            <p className="mb-2">投稿餐廳：用戶可以提交新的餐廳資料。</p>
+            <p className="text-xl font-bold mb-2">尋找美食</p>
+            <p className="mb-2">左側(上方)為餐廳列表，點擊餐廳可將地圖移動至餐廳位置。</p>
+            <p className="mb-2">地圖上標示表示餐廳形式與料理類別，點擊可查看餐廳名與地址。</p>
+            <p className="mb-2">右側按鈕點擊可篩選特定條件餐廳，勾選條件後按篩選即可。</p>
+            <p className="text-xl font-bold mb-2">美食抽獎</p>
+            <p className="mb-2">左側(上方)為篩選表，可調整需求與想抽選的數量，點選最下方抽選即可。</p>
+            <p className="mb-2">右側(下方)顯示抽獎結果。點選可顯示更多餐廳資訊與地圖。</p>
+            <p className="text-xl font-bold mb-2">投稿餐廳</p>
+            <p className="mb-2">請依要求填寫。若有缺乏的選項歡迎反應，但我不一定有空看OwO。</p>
           </div>
         </div>
       )}
