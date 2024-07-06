@@ -5,6 +5,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import myicon from "./pikachu.png"
 import homeicon from "./what-to-eat.gif"
+import infoIcon from "./info.png"
 
 
 function classNames(...classes) {
@@ -71,19 +72,17 @@ export default function RootLayout() {
                           {item.name}
                         </NavLink>
                       ))}
-                      <button 
-                        className="text-gray-300 hover:bg-red-800 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                        onClick={() => setIsModalOpen(true)}
-                      >
-                        <span className="sr-only">使用說明</span>
-                        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h0m0-4h0m0-6h0m6 6h0M6 12h0m12-4h0M6 8h0m6 12h0m6-10h0M6 16h0" />
-                        </svg>
-                      </button>
                     </div>
                   </div>
                 </div>
-                
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <button
+                    className="bg-white rounded-full p-2"
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    <img src={infoIcon} alt="Info" className="h-6 w-6"/>
+                  </button>
+                </div>
               </div>
             </div>
 
