@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { Fragment } from "react";
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import myicon from "./pikachu.png"
