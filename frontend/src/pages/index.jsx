@@ -142,6 +142,8 @@ export default function RootLayout() {
             <p className="mb-2">左側(上方)為餐廳列表，點擊餐廳可將地圖移動至餐廳位置。</p>
             <p className="mb-2">地圖上標示表示餐廳形式與料理類別，點擊可查看餐廳名與地址。</p>
             <p className="mb-2">右側按鈕點擊可篩選特定條件餐廳，勾選條件後按篩選即可。</p>
+            <p className="font-bold text-red-500 mb-2">注意</p>
+            <p className="mb-2">我不知道為什麼Google Map API回傳的地點跟Google Map自己紀錄的地點會不一樣，使用時請注意圖標與餐廳實際地點可能有些微差距。</p>
             <p className="text-xl font-bold mb-2">美食抽獎</p>
             <p className="mb-2">左側(上方)為篩選表，可調整需求與想抽選的數量，點選最下方抽選即可。</p>
             <p className="mb-2">右側(下方)顯示抽獎結果。點選可顯示更多餐廳資訊與地圖。</p>
