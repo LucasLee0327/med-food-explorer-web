@@ -91,6 +91,7 @@ function Addnew() {
                           <option value="拉麵">拉麵</option>
                           <option value="簡餐">簡餐</option>
                           <option value="合菜">合菜</option>
+                          <option value="早餐">早餐</option>
                           <option value="其他">其他</option>
                       </select>
                   </label>
@@ -104,9 +105,9 @@ function Addnew() {
                           onChange={handleChange} 
                           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       >
-                          <option value="便宜">便宜</option>
-                          <option value="中等">中等</option>
-                          <option value="貴">貴</option>
+                          <option value="便宜">便宜(小於150元)</option>
+                          <option value="中等">中等(150~300元)</option>
+                          <option value="貴">貴(大於300元)</option>
                       </select>
                   </label>
               </div>
@@ -117,7 +118,8 @@ function Addnew() {
                           type="text" 
                           name="address" 
                           value={newCandidate.address} 
-                          onChange={handleChange} 
+                          onChange={handleChange}
+                          placeholder="請輸入三碼郵遞區號+地址，推薦從Google地圖複製最快 OuO b"
                           required 
                           className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                       />

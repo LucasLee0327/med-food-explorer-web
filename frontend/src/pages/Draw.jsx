@@ -104,7 +104,7 @@ function Draw() {
                     <fieldset className="border p-4 rounded-lg">
                         <legend className="text-lg font-bold mb-2">料理類別:</legend>
                         <div className="grid grid-cols-3 gap-2">
-                            {['飯', '麵', '速食', '素食', '火鍋', '拉麵', '簡餐', '合菜', '其他'].map(type => (
+                            {['飯', '麵', '速食', '素食', '火鍋', '拉麵', '簡餐', '合菜', '早餐', '其他'].map(type => (
                             <label key={type} className="block mb-2">
                                 <input
                                 type="checkbox"
@@ -124,7 +124,7 @@ function Draw() {
                     <fieldset className="border p-4 rounded-lg">
                         <legend className="text-lg font-bold mb-2">價格:</legend>
                         <div className="grid grid-cols-3 gap-2">
-                            {['便宜', '中等', '貴'].map(price => (
+                            {['便宜(小於150元)', '中等(150~300元)', '貴(大於300元)'].map(price => (
                             <label key={price} className="block mb-2">
                                 <input
                                 type="checkbox"

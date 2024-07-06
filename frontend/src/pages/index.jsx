@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import React, { useContext, useState } from 'react'
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import myicon from "./pikachu.png"
+// import myicon from "./pikachu.png"
 import homeicon from "./what-to-eat.gif"
 import infoIcon from "./info.png"
 
@@ -42,6 +42,7 @@ export default function RootLayout() {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                  {/*
                   <div className="flex flex-shrink-0 items-center">
                     <img
                       className="block h-8 w-auto lg:hidden"
@@ -53,7 +54,9 @@ export default function RootLayout() {
                       src={myicon}
                       alt="Your Company"
                     />
-                  </div>
+                  </div>*/
+                  }
+                  
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
@@ -107,12 +110,6 @@ export default function RootLayout() {
                       {item.name}
                     </NavLink>
                   ))}
-                  <button
-                    className="bg-red-600 rounded-full p-2 ml-3 mt-2"
-                    onClick={() => setIsModalOpen(true)}
-                  >
-                    <img src={infoIcon} alt="Info" className="h-6 w-6"/>
-                  </button>
                 </div>
               )}
             </Disclosure.Panel>
